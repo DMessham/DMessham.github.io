@@ -99,14 +99,14 @@ function draw() {
   
 function bg(){
   background(bgHue, bgSat, bgBright);//redraw the bg to ensure that no trails happen
-  for (let x = 0; x < width; x += 34) {
-    for (let y = 0; y < height; y += 34) {
-      let bgEffect = int(dist(x, y, x0, y0));
-      colorMode(HSB);
-      fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.8,0.1));
-      rect(x, y, 17);
-    }
-  }
+  // for (let x = 0; x < width; x += 34) {
+  //   for (let y = 0; y < height; y += 34) {
+  //     let bgEffect = int(dist(x, y, x0, y0));
+  //     colorMode(HSB);
+  //     fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.8,0.1));
+  //     rect(x, y, 17);
+  //   }
+  // }
 
 }
 function move(){//basic colllision logic
@@ -152,10 +152,10 @@ function move(){//basic colllision logic
     dy0=-dy0;
   }
   y0 += dy0*ndy0;//move ball y
-  y2 += map(y0, y2-(sizeY2/2), y2+(sizeY2*2)+(windowHeight/2)-50, 0,windowHeight-sizeY2)-(sizeY2/1);//still p boring
-  //y2 = (map(y0, y2+(sizeY2/2)-dist(x0,y0,x2,y2), y2+(sizeY2/2)+dist(x0,y0,x2,y2), 0,windowHeight-(sizeY2/2)));//janky af
+  //y2 += map(y0, y2-(sizeY2/2), y2+(sizeY2*2)+(windowHeight/2)-50, 0,windowHeight-sizeY2)-(sizeY2/1);//still p boring
+  y2 = (map(y0, y2+(sizeY2/2)-dist(x0,0,x2,0), y2+(sizeY2/2)+dist(0,y0,0,y2), 0,windowHeight-(sizeY2/2)));//janky af
   //y2 = (map(y1, y0-dist(x0,0,x2,0), y0+dist(x0,0,x2,0), 0,windowHeight-sizeY2/2));//broken
-  y2 = y0-(sizeY2/2)// automove paddle 2 (simple, unfair and boring)
+  //y2 = y0-(sizeY2/2)// automove paddle 2 (simple, unfair and boring)
   y1 = y0-(sizeY1/2)// automove paddle 1 (for testing ai longterm)
 }
 
