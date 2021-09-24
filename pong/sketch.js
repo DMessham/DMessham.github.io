@@ -2,8 +2,7 @@
 // Daniel Messham
 // fri 24 sept
 //
-//TODO: Fix wonky ai
-import("d:/GIT/CLONE/Dmessham.github.io/pong/node_modules/@types/p5/index.d.ts")
+//TODO: Fix really wonky ai
 let refresh = 50//target framerate, used to calc realfps
 let targetDelta = 33.3
 let startTime, millisecond = 0;//initilaize debug values
@@ -36,7 +35,7 @@ let sizeX2 = 17.5;
 let sizeY2 = 160; //initial size for x and y(squares)
 let speed2 = 1;//combined speed for horiz & vert
 
-//player stats for game
+//player scores for game
 let player1Score = 0
 let player2Score = 0
 
@@ -75,11 +74,6 @@ function windowResized(){
   x2 = windowWidth-50;
   sizeY1 = windowHeight/10;
   sizeY2 = windowHeight/10;
-}
-
-function mouseClicked(){
-  //speed0 = 1; //right now speed modifier is the same between x and y, that might change if i want to reuse this code elsewhere
-  //speed0=randomGaussian(1.5,1);
 }
 
 function draw() {
@@ -164,7 +158,7 @@ function move(){//basic colllision logic
 
 function txtInfo(){
    let infoString = "Daniel Messham's Pong clone\nComp sci 30, fri Sept 24, '21";//information string used for author info
-  let realFPS = round((refresh/deltaTime)*20-10,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
+  let realFPS = round((refresh/deltaTime)*20,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
   runTime = round((millis()-startTime)/1000,1)
   
   let targetDelta = round((1/refresh)*1000,2)
