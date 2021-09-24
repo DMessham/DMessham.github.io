@@ -1,21 +1,17 @@
-// Project Title
+// Pong
 // Daniel Messham
-// Date
+// fri 24 sept
 //
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-//almost all of these variables will change from these values very quiclkly, these are only sensable starting points
-
-//TODO: Fix extreme slowdown on color shift
-
-let refresh = 30//target framerate, used to calc realfps
+//TODO: Fix wonky ai
+import("d:/GIT/CLONE/Dmessham.github.io/pong/node_modules/@types/p5/index.d.ts")
+let refresh = 50//target framerate, used to calc realfps
 let targetDelta = 33.3
 let startTime, millisecond = 0;//initilaize debug values
 
 let x0 = 400; 
 let y0 = 300; //initial position
-let dx0 = -5;
-let dy0 = 5; //inital speed
+let dx0 = -3;
+let dy0 = 3; //inital speed
 let ndx0 = 1;
 let ndy0 = 1; //speed modifier
 
@@ -52,8 +48,7 @@ let bgBright=(18);//Background brightness
 
 
 function setup() {
-  createCanvas(800, 600);
-  //createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
   frameRate(refresh)
   background(12,35,12);
   strokeWeight(0);
@@ -62,12 +57,24 @@ function setup() {
   imageMode(CENTER);
   noSmooth();
   startTime = millis();
+  ndx0 = dist(0,0,windowWidth,windowHeight)/930;
+  ndy0 = dist(0,0,windowWidth,windowHeight)/930;
+  speedX1 = dist(0,0,windowWidth,windowHeight)/140;
+  speedY1 = dist(0,0,windowWidth,windowHeight)/140;
+  x2 = windowWidth-50;
+  sizeY1 = windowHeight/6;
+  sizeY2 = windowHeight/6;
 }
 
 function windowResized(){
-  //createCanvas(windowWidth, windowHeight);
-  //x0=200;
-  //y0=200;
+  createCanvas(windowWidth, windowHeight);
+  ndx0 = dist(0,0,windowWidth,windowHeight)/930;
+  ndy0 = dist(0,0,windowWidth,windowHeight)/730;
+  speedX1 = dist(0,0,windowWidth,windowHeight)/140;
+  speedY1 = dist(0,0,windowWidth,windowHeight)/140;
+  x2 = windowWidth-50;
+  sizeY1 = windowHeight/10;
+  sizeY2 = windowHeight/10;
 }
 
 function mouseClicked(){
@@ -86,23 +93,24 @@ function draw() {
   rect(x1-sizeX1,y1,sizeX1, sizeY1);//draw player paddle
   
   fill(98,0.4);//
-  rect(x2+sizeX2,y2,sizeX2, sizeY2);//draw ai paddle
+  rect(x2,y2,sizeX2, sizeY2);//draw ai paddle
   
   circle(x0,y0,size0*2);//draw the circle
   
   frameDelta = frameCount//*deltaTime/1000
+}
   
 function bg(){
   background(bgHue, bgSat, bgBright);//redraw the bg to ensure that no trails happen
-  for (let x = 0; x < width; x += 13) {
-    for (let y = 0; y < height; y += 13) {
+  for (let x = 0; x < width; x += 34) {
+    for (let y = 0; y < height; y += 34) {
       let bgEffect = int(dist(x, y, x0, y0));
       colorMode(HSB);
       fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.8,0.1));
-      circle(x, y, 7);
+      rect(x, y, 17);
     }
   }
-}
+
 }
 function move(){//basic colllision logic
   
@@ -122,14 +130,12 @@ function move(){//basic colllision logic
     }
   
   if (x0 + size0 >= width){//reset ball if paddle2 miss
-    //dx0=-dx0;
-    x0 = 400;y0 = 300;
+    x0 = windowWidth/2;y0 = windowHeight/2;
     player1Score++
   }
   
   else if (x0 - size0 <= 0){//reset ball if paddle1 miss
-    //dx0=-dx0;
-    x0 = 400;y0 = 300;
+    x0 = windowWidth/2;y0 = windowHeight/2;
     player2Score++
   }
   
@@ -149,33 +155,33 @@ function move(){//basic colllision logic
     dy0=-dy0;
   }
   y0 += dy0*ndy0;//move ball y
-  //y2 = y0-(sizeY2/2)// automove paddle 2
-  //y1 = y0-(sizeY1/2)// automove paddle 1
+  //y2 += map(y0, y2-(sizeY2/2), y2+(sizeY2*2)+(windowHeight/2)-50, 0,windowHeight-sizeY2)-(sizeY2/1);//still p boring
+  y2 = (map(y0, y2+(sizeY2/2)-dist(x0,y0,x2,y2), y2+(sizeY2/2)+dist(x0,y0,x2,y2), 0,windowHeight-(sizeY2/2)));//janky af
+  //y2 = (map(y1, y0-dist(x0,0,x2,0), y0+dist(x0,0,x2,0), 0,windowHeight-sizeY2/2));//broken
+  //y2 = y0-(sizeY2/2)// automove paddle 2 (simple, unfair and boring)
+  y1 = y0-(sizeY1/2)// automove paddle 1 (for testing ai longterm)
 }
 
 function txtInfo(){
-   let infoString = "Daniel Messham's Pong clone\nComp sci 30, mon Sept 20, '21";//information string used for author info
-
-  
-  let realFPS = round((refresh/deltaTime)*20,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
+   let infoString = "Daniel Messham's Pong clone\nComp sci 30, fri Sept 24, '21";//information string used for author info
+  let realFPS = round((refresh/deltaTime)*20-10,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
   runTime = round((millis()-startTime)/1000,1)
   
   let targetDelta = round((1/refresh)*1000,2)
   
   let debugString = "DEBUG/PERFORMANCE INFO\nBall pos (X,Y): "+x0+", "+y0+'\nP1y (Top,Btm): ('+y1+','+(y1+sizeY1)+')\nP2y (Top,Btm): ('+y2+','+(y2+sizeY2)+')\n';//basic debug info string
   
-  let performanceString = '\nCurrent FPS:   '+realFPS+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+runTime+'Seconds\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+targetDelta+'ms\nWhy does tinting anything slow everything down so much?\n'
+  let performanceString = '\nCurrent FPS:   '+realFPS+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+runTime+'Seconds\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+targetDelta+'ms\nWHY WONT THE AI JUST WORK?\n'
   
   fill(100, 0.5)//set color for text
   textSize(20)//set text for general info
-  text((infoString),10,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
+  text((infoString),60,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
   textSize(17)//set size for debug info
-  text((debugString+performanceString),10,90);//print changing info to screen, have to redraw every time since it updates in real time
-  
+  text((debugString+performanceString),60,90);//print changing info to screen, have to redraw every time since it updates in real time
 }
 
 function hud(){
-  textSize(57)
-  text(player1Score,175,150);
-  text(player2Score,625,150);
+  textSize(77);
+  text(player1Score,windowWidth*(1/3),windowHeight*(4/5));
+  text(player2Score,windowWidth*(2/3),windowHeight*(4/5));
 }
