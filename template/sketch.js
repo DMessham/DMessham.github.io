@@ -1,5 +1,5 @@
 // Project Title
-// Your Name
+// Daniel Messham
 // Date
 //
 // Extra for Experts:
@@ -12,4 +12,5 @@ function setup() {
 
 function draw() {
   background(220);
+  rect(mouseX,mouseY,100,50)
 }
