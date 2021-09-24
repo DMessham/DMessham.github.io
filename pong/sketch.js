@@ -56,13 +56,14 @@ function setup() {
   imageMode(CENTER);
   noSmooth();
   startTime = millis();
-  ndx0 = dist(0,0,windowWidth,windowHeight)/930;
-  ndy0 = dist(0,0,windowWidth,windowHeight)/930;
+  ndx0 = (dist(0,0,windowWidth,windowHeight)/730);
+  ndy0 = ndx0
   speedX1 = dist(0,0,windowWidth,windowHeight)/140;
   speedY1 = dist(0,0,windowWidth,windowHeight)/140;
   x2 = windowWidth-50;
-  sizeY1 = windowHeight/6;
-  sizeY2 = windowHeight/6;
+  sizeY1 = windowHeight/7;
+  sizeY2 = windowHeight/7;
+  size0 = ((windowHeight+windowWidth)/2)/100
 }
 
 function windowResized(){
@@ -72,8 +73,8 @@ function windowResized(){
   speedX1 = dist(0,0,windowWidth,windowHeight)/140;
   speedY1 = dist(0,0,windowWidth,windowHeight)/140;
   x2 = windowWidth-50;
-  sizeY1 = windowHeight/10;
-  sizeY2 = windowHeight/10;
+  sizeY1 = windowHeight/7;
+  sizeY2 = windowHeight/7;
 }
 
 function draw() {
@@ -92,6 +93,8 @@ function draw() {
   circle(x0,y0,size0*2);//draw the circle
   
   frameDelta = frameCount//*deltaTime/1000
+  ndx0 = (dist(0,0,windowWidth,windowHeight)/27300)*deltaTime
+  ndy0 = ndx0
 }
   
 function bg(){
