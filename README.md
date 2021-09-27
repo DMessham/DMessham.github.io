@@ -1,4 +1,4 @@
 # Dmessham.github.io
 DMessham's CompSci 30 repository
 Projects:
-[Pong](/pong) [DVD Bounce](/DVD) [RedFlash](/redflash)
+[Pong](https://dmessham.github.io/pong) [DVD Bounce](https://dmessham.github.io/DVD) [RedFlash](https://dmessham.github.io/redflash)

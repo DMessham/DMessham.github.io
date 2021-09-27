@@ -29,8 +29,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(refresh)
   bgHue=(random(255));
-  bgSat=randomGaussian(128,128);
-  bgBright=randomGaussian(128,128);
+  bgSat=randomGaussian(128,76);
+  bgBright=randomGaussian(128,76);
   background(bgHue, bgSat, bgBright);
   strokeWeight(0);
   fill(168);
@@ -46,8 +46,8 @@ function windowResized(){
 
 function keyPressed(){
   bgHue=(random(255));
-  bgSat=randomGaussian(128,128);
-  bgBright=randomGaussian(128,128);
+  bgSat=randomGaussian(128,76);
+  bgBright=randomGaussian(128,76);
   }
 
 function mouseClicked(){
@@ -83,16 +83,10 @@ function move(){//basic colllision logic
   y0 += dy0*speed*(deltaTime/((1/refresh)*1000));//move in y axis
 }
 function txtInfo(){
-  let infoString = "Daniel Messham's JavaScript DVD Logo Bounce\nComp sci 30, S1, Friday September 17th, 2021";//information string used for author info
-  
-  let realFPS = round((refresh/deltaTime)*20,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
-  
-  let debugString = "DEBUG/PERFORMANCE INFO\nPosition (X,Y): "+round(x0,3)+", "+round(y0,3)+'\nSpeed:            '+speed+'\nCurrent FPS:   '+realFPS+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+round((millis()-startTime)/1000)+'Seconds\nCurrent Delta: '+deltaTime+'ms\nTarget Delta:   '+(1/refresh)*1000+'ms\nWhy does tinting anything slow everything down so much?'
-  
   fill(100)//set color for text
   textSize(20)//set text for general info
-  text((infoString),10,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
+  text("Daniel Messham's JavaScript DVD Logo Bounce\nComp sci 30, S1, Monday September 27th, 2021",10,30);//information string used for author info)
   textSize(17)//set size for debug info
-  text((debugString),10,90);//print changing info to screen, have to redraw every time since it updates in real time
+  text(("DEBUG/PERFORMANCE INFO\nPosition (X,Y): "+round(x0,3)+", "+round(y0,3)+'\nSpeed Mult:     '+speed+'\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+round((millis()/1-startTime)/1000)+' Seconds\nCurrent Delta: '+round(deltaTime*1,2)+'ms\nTarget Delta:   '+round(((1/refresh)*1000),2)+'ms'),10,90);
   
 }
