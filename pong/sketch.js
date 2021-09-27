@@ -30,6 +30,7 @@ let x2 = 750;
 let y2 = 200; //initial position
 let dx2, dy2 = 60; //inital speed
 let ndx2, ndy2 = 5; //speed modifier
+let oldP2Y = y2
 
 let sizeX2 = 17.5;
 let sizeY2 = 160; //initial size for x and y(squares)
@@ -93,6 +94,8 @@ function draw() {
   circle(x0,y0,size0*2);//draw the circle
   
   frameDelta = frameCount//*deltaTime/1000
+
+  oldP2Y = y2
   //ndx0 = ((dist(0,0,windowWidth,windowHeight)*3)/(deltaTime*5))/6;
   //ndy0 = ndx0
 }
@@ -153,7 +156,8 @@ function move(){//basic colllision logic
   }
   y0 += dy0*ndy0;//move ball y
   //y2 += map(y0, y2-(sizeY2/2), y2+(sizeY2*2)+(windowHeight/2)-50, 0,windowHeight-sizeY2)-(sizeY2/1);//still p boring
-  y2 = (map(y0, y2+(sizeY2/2)-dist(x0,0,x2,0), y2+(sizeY2/2)+dist(0,y0,0,y2), 0,windowHeight-(sizeY2/2)));//janky af
+  y2 += map(y0, oldP2Y-(sizeY2), oldP2Y+(sizeY2*2),0,(windowHeight-sizeY2));//still p boring
+  //y2 = (map(y0, y2+(sizeY2/2)-dist(x0,0,x2,0), y2+(sizeY2/2)+dist(0,y0,0,y2), 0,windowHeight-(sizeY2/2)));//janky af
   //y2 = (map(y1, y0-dist(x0,0,x2,0), y0+dist(x0,0,x2,0), 0,windowHeight-sizeY2/2));//broken
   //y2 = y0-(sizeY2/2)// automove paddle 2 (simple, unfair and boring)
   y1 = y0-(sizeY1/2)// automove paddle 1 (for testing ai longterm)
