@@ -3,10 +3,8 @@
 //TODO: Fix extreme slowdown on color shift
 
 let refresh = 60//target framerate, used to calc realfps
-let realFPS, runTime = 0, startTime = 0, millisecond = 0;
-let debugString = "DEBUG/PERFORMANCE INFO\nERROR! cannot load collision!"; //basic debug info string
-let performanceString = 'Error: unable to Display Debug info';//init string for displaying debug info
-let infoString = "Daniel Messham's JavaScript DVD Logo Bounce\nComp sci 30, S1, Friday September 17th, 2021";//information string used for author info
+let runTime = 0, startTime = 0, millisecond = 0;
+
 
 let x0 = 200;
 let y0 = 200; //initial position
@@ -88,13 +86,14 @@ function move(){//basic colllision logic
   }
 }
 function txtInfo(){
+  let infoString = "Daniel Messham's JavaScript DVD Logo Bounce\nComp sci 30, S1, Friday September 17th, 2021";//information string used for author info
   
-  realFPS = round((refresh/deltaTime)*20,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
-  runTime = round((millis()-startTime)/1000);
+  let realFPS = round((refresh/deltaTime)*20,2);//calculate frame rate using delta time(aka how long it took to draw the last frame)
+  let runTime = round((millis()-startTime)/1000);
   
-  debugString = "DEBUG/PERFORMANCE INFO\nPosition (X,Y): "+round(x0,3)+", "+round(y0,3)+'\nSpeed:            '+speed; //basic debug info string
+  let debugString = "DEBUG/PERFORMANCE INFO\nPosition (X,Y): "+round(x0,3)+", "+round(y0,3)+'\nSpeed:            '+speed; //basic debug info string
   
-  performanceString = '\nCurrent FPS:   '+realFPS+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+runTime+'Seconds\nCurrent Delta: '+deltaTime+'ms\nTarget Delta:   '+(1/refresh)*1000+'ms\nWhy does tinting anything slow everything down so much?'
+  let performanceString = '\nCurrent FPS:   '+realFPS+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+runTime+'Seconds\nCurrent Delta: '+deltaTime+'ms\nTarget Delta:   '+(1/refresh)*1000+'ms\nWhy does tinting anything slow everything down so much?'
   
   fill(100)//set color for text
   textSize(20)//set text for general info
