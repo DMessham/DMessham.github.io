@@ -1,2 +1,4 @@
 # Dmessham.github.io
-Daniel Messham's computer science 30 repository
+DMessham's CompSci 30 repository
+Projects:
+[Pong](/pong) [DVD Bounce](/DVD) [RedFlash](/redflash)
