@@ -24,11 +24,10 @@ let sizeY0 = sizeX0/2; //initial size for y(squares)
 let bgHue, bgSat, bgBright=128;//Background brightness
 
 function preload(){
-  img = loadImage('/DVD2.png');
+  img = loadImage('DVD2.png');
 }
 
 function setup() {
-  collideDebug(true)
   startTime = millis();
   createCanvas(windowWidth, windowHeight);
   frameRate(refresh)
@@ -83,7 +82,7 @@ function move(){//basic colllision logic
     dy0=-dy0;//invert direction
     tint(random(128,255),random(128,255),random(128,255))//randomly tint the image
   }
-  if ( || x0 + sizeY0 + 1 >= mouseX && x0 -1 <= mouseX || y0 + sizeY0+1 >= mouseY && y0 -1 <= mouseY){
+  if (x0 + sizeY0 + 1 >= mouseX && x0 -1 <= mouseX || y0 + sizeY0+1 >= mouseY && y0 -1 <= mouseY){
     
     
   }
