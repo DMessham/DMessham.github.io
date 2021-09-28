@@ -3,7 +3,7 @@
 // fri 24 sept
 //
 //TODO: Fix really wonky ai
-let refresh = 30//target framerate, used to calc realfps
+let refresh = 60//target framerate, used to calc realfps
 let startTime, millisecond = 0;//initilaize debug values
 
 let x0 = 400; 
