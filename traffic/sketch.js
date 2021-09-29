@@ -24,7 +24,7 @@ function draw() {
   drawOutlineOfLights();
   fill(12);
   text('Time:'+round(millis()), 10,20);
-  text('Change:'+round(switchTime), width*(2/5),30);
+  text('Change:'+round(switchTime), (width*(2/5)),34);
   text(("State:"+trafficState), 10,34);
 }
 
@@ -51,15 +51,15 @@ function drawOutlineOfLights() {
 }
 
 function lightColor(){
-  if(millis() > switchTime + redTime && trafficState===0){
+  if(millis() > switchTime + redTime && trafficState==='yellow'){
     trafficState = 'red';
     switchTime = millis();
   }
-  else if(millis() > switchTime + greenTime && trafficState===1){
+  else if(millis() > switchTime + greenTime && trafficState==='red'){
     trafficState = 'green';
     switchTime = millis()
   }
-  else if(millis() > switchTime + yellowTime && trafficState===2){
+  else if(millis() > switchTime + yellowTime && trafficState==='green'){
     trafficState = 'yellow';
     switchTime = millis()
   }
