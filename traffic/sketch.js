@@ -24,8 +24,8 @@ function draw() {
   drawOutlineOfLights();
   fill(12);
   text('Time:'+round(millis()), 10,20);
-  text('Change:'+round(switchTime), (width*(2/5)),34);
-  text(("State:"+trafficState), 10,34);
+  text('Change:'+round(switchTime), (width*(2/5)),35);
+  text(("State:"+trafficState), 10,35);
 }
 
 function drawOutlineOfLights() {
