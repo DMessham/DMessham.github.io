@@ -1,0 +1,277 @@
+h1 {
+	color: green;
+	font-size:25px;
+	text-align: center;
+	display: block;
+	margin-left: 1%;
+	margin-right: 1%;
+	margin-bottom: 0.15%;
+	margin-top: 0.15%;
+	padding: 7px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 6px;
+	background-color: rgb(35, 36, 30, 0.7);
+}
+h2 {
+	color: white;
+	margin-left: 6%;
+	margin-right: 6%;
+	margin-bottom: 0.65%;
+	margin-top: 0.65%;
+	padding: 15px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: seagreen;
+	background-color: rgb(35, 36, 30, 0.5);
+}
+
+body{
+	background-color: rgb(44, 85, 37);
+	background-image: url("style/window-gradient.png"), url("style/square2.png");
+	background-size: cover, contain;
+	background-position: left top, left top;
+	background-repeat: no-repeat, repeat;
+}
+
+p {
+	color: floralwhite;
+	margin-left: 0.1%;
+	margin-right: 0.1%;
+	margin-bottom: 0.25%;
+	margin-top: 0.25%;
+}
+
+div {
+	color: floralwhite;
+	margin-left: 6%;
+	margin-right: 6%;
+	margin-bottom: 0.65%;
+	margin-top: 0.65%;
+	padding: 15px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: lightseagreen;
+	background-color: rgb(35, 36, 30, 0.3);
+}
+
+name{
+	border: 2px solid rgba(37, 114, 37, 0.322);
+	color: rgba(255, 255, 255, 0.621);
+	opacity: 1;
+	font-size:30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 5px 6px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	background-image: url("style/button_bg.png");
+	background-size: cover;
+	background-position: center;
+	background-clip: border-box;
+	background-repeat: repeat-x;
+}
+
+a {
+	line-height: 0.8;
+	background-color: rgba(0, 0, 0, 0.16);
+	border: 2px solid rgba(0, 128, 0, 0.286);
+	color: white;
+	opacity: 1;
+	font-size:20px;
+	text-align: center;
+	text-decoration: underline;
+	display: inline-block;
+	list-style-position: inside;
+	padding: 2px;
+	border-style: solid;
+	border-width: 1.5px;
+	border-radius: 3px;
+}
+
+li a{
+	line-height: 0.9;
+	background-color: rgba(0, 0, 0, 0.02);
+	color: lightseagreen;
+	opacity: 1;
+	list-style-image: url("style/buttons/chevron-inverted.png");
+	display: inline-block;
+	list-style-position: inside;
+	padding: 2px;
+	margin-top: 1px;
+	margin-bottom: 1px;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-style: solid;
+	border-width: 1.5px;
+	border-radius: 3px;
+
+}
+
+nav {
+	background-color: darkslategray;
+	background-image: url("style/Bitmap102a.bmp");
+	background-repeat: repeat-x;
+	background-size: cover;
+	background-size: 100%;
+	text-align: center;
+	list-style-type: none;
+	display: block;
+	line-height: 0.5;
+	padding: 1.5px;
+	margin-left: 6%;
+	margin-right: 6%;
+	margin-bottom: 0.2%;
+	margin-top: 0.1%;
+	border-style: solid;
+	border-width: 1.5px;
+	border-radius: 3px;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	overflow: hidden;
+	top: 5px;
+}
+
+nav li {
+	line-height: 0.9;
+	background-color: rgba(0, 0, 0, 0.12);
+	color: white;
+	opacity: 1;
+	list-style-type: none;
+	display: inline-block;
+	padding: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 1px;
+	margin-right: 1px;
+	position: -webkit-sticky; /* Safari */
+	position: sticky;
+	border-radius: 5px;
+
+}
+nav li a {
+	border: 2px solid rgba(37, 114, 37, 0.012);
+	color: rgba(255, 255, 255, 0.621);
+	opacity: 1;
+	font-size:20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 5px 3.5px;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 5px;
+	background-image: url("style/buttons/button_trasparent1.png");
+	background-size: cover;
+	background-size: '100%';
+	background-position: center;
+	background-clip: border-box;
+	background-repeat: repeat-x;
+	margin-left: 1px;
+	margin-right: 1px;
+}
+nav li a name{
+	border: 2px solid rgba(37, 114, 37, 0.322);
+	color: rgba(255, 255, 255, 0.921);
+	opacity: 1;
+	font-size:22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 3px, 0px;
+	border-style: solid;
+	border-width: 0px;
+	border-radius: 5px;
+	background-size: 0%;
+}
+
+  
+nav li a:hover {
+	background-color: rgba(0, 128, 0, 0.24);
+	border-color: rgba(255, 255, 255, 0.06);
+	color: white;
+	text-decoration: underline;
+	background-repeat: repeat-x;
+	border-style: solid;
+	font-size:21px;
+	padding: 5px 4.5px;
+	border-width: 4px;
+	border-radius: 5px;
+	background-image: url("style/bar1.bmp");
+	background-size: cover;
+	background-position: center;
+	background-clip: border-box;
+  }
+
+.active {
+	color: rgba(25, 212, 72, 0.44);
+	opacity: 1;
+	font-size:21px;
+	text-align: center;
+	text-decoration: underline;
+	display: block;
+	padding: 4px 6.5px;
+	border-style: solid;
+	border-color: rgba(37, 114, 37, 0.322);
+	border-width: 2px;
+	border-radius: 4px;
+}
+.active:hover {
+	background-color: rgba(0, 128, 0, 0.24);
+	border-color: rgba(255, 255, 255, 0.06);
+	border-style: solid;
+	color: white;
+	font-size:22px;
+	text-decoration: underline;
+	background-repeat: repeat-x;
+	border-style: solid;
+	padding: 2px 4px;
+	border-width: 4px;
+	border-radius: 4px;
+  }
+img {
+	border-radius: 5px;
+	border-width: 1.5px;
+	border-style: solid;
+	border-color: rgba(179, 179, 179, 0.568);
+}
+iframe {
+	border-radius: 5px;
+	border-width: 1.5px;
+	border-style: solid;
+	border-color: rgba(179, 179, 179, 0.568);
+}
+.button {
+	line-height: 0.9;
+	border: 2px solid rgba(37, 114, 37, 0.322);
+	color: rgba(255, 255, 255, 0.621);
+	opacity: 1;
+	font-size:20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 5px 5px;
+	border-style: solid;
+	border-width: 1.5px;
+	border-radius: 4px;
+	background-image: url("style/window-gradient.png");
+	background-size: cover;
+	background-position: left top, ;
+}
+.button:hover {
+	background-color: rgba(0, 128, 0, 0.24);
+	border-color: rgba(255, 255, 255, 0.06);
+	color: white;
+	text-decoration: underline;
+	background-repeat: repeat-x;
+	border-style: solid;
+	font-size:21px;
+	padding: 1px 7.5px;
+	border-width: 4px;
+	border-radius: 4px;
+}
+
