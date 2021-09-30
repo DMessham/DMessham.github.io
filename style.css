@@ -29,10 +29,10 @@ h2 {
 
 body{
 	background-color: rgb(44, 85, 37);
-	background-image: url("style/window-gradient.png"), url("style/square2.png");
-	background-size: cover, contain;
-	background-position: left top, left top;
-	background-repeat: no-repeat, repeat;
+	background-image: url("style/square2.png");
+	background-size: contain;
+	background-position: left top;
+	background-repeat: repeat;
 }
 
 p {
@@ -116,13 +116,13 @@ nav {
 	background-color: darkslategray;
 	background-image: url("style/Bitmap102a.bmp");
 	background-repeat: repeat-x;
-	background-size: cover;
+	background-size: fill;
 	background-size: 100%;
 	text-align: center;
 	list-style-type: none;
 	display: block;
 	line-height: 0.5;
-	padding: 1.5px;
+	padding: 1px;
 	margin-left: 6%;
 	margin-right: 6%;
 	margin-bottom: 0.2%;
@@ -144,8 +144,8 @@ nav li {
 	list-style-type: none;
 	display: inline-block;
 	padding: 0px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 	margin-left: 1px;
 	margin-right: 1px;
 	position: -webkit-sticky; /* Safari */
@@ -165,8 +165,8 @@ nav li a {
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 5px;
-	background-image: url("style/buttons/button_trasparent1.png");
-	background-size: cover;
+	background-image: url("style/bar1.bmp");
+	background-size: fill;
 	background-size: '100%';
 	background-position: center;
 	background-clip: border-box;
@@ -175,19 +175,18 @@ nav li a {
 	margin-right: 1px;
 }
 nav li a name{
-	border: 2px solid rgba(37, 114, 37, 0.322);
 	color: rgba(255, 255, 255, 0.921);
 	opacity: 1;
 	font-size:22px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
-	padding: 3px, 0px;
+	padding: -3px, 2px;
 	border-style: solid;
 	border-width: 0px;
-	border-radius: 5px;
 	background-size: 0%;
 }
+
 
   
 nav li a:hover {
@@ -198,11 +197,11 @@ nav li a:hover {
 	background-repeat: repeat-x;
 	border-style: solid;
 	font-size:21px;
-	padding: 5px 4.5px;
-	border-width: 4px;
+	padding: -5px 3px;
+	border-width: 2px;
 	border-radius: 5px;
-	background-image: url("style/bar1.bmp");
-	background-size: cover;
+	background-image: url("style/bar2.bmp");
+	background-size: fill;
 	background-position: center;
 	background-clip: border-box;
   }
@@ -214,7 +213,7 @@ nav li a:hover {
 	text-align: center;
 	text-decoration: underline;
 	display: block;
-	padding: 4px 6.5px;
+	padding: 2px 6.5px;
 	border-style: solid;
 	border-color: rgba(37, 114, 37, 0.322);
 	border-width: 2px;
@@ -229,8 +228,8 @@ nav li a:hover {
 	text-decoration: underline;
 	background-repeat: repeat-x;
 	border-style: solid;
-	padding: 2px 4px;
-	border-width: 4px;
+	padding: 5px -6px;
+	border-width: 1px;
 	border-radius: 4px;
   }
 img {
