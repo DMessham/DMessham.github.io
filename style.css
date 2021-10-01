@@ -10,27 +10,30 @@ h1 {
 	padding: 7px;
 	border-width: 2px;
 	border-style: solid;
-	border-radius: 6px;
+	border-radius: 7px;
 	background-color: rgb(35, 36, 30, 0.7);
 }
 h2 {
 	color: white;
-	margin-left: 6%;
-	margin-right: 6%;
-	margin-bottom: 0.65%;
-	margin-top: 0.65%;
-	padding: 15px;
-	border-width: 2px;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 0.015%;
+	margin-top: 0.55%;
+	padding: 7.5px;
+	border-width: 1.5px;
 	border-style: solid;
-	border-radius: 5px;
-	border-color: seagreen;
-	background-color: rgb(35, 36, 30, 0.5);
+	border-radius: 12px;
+	border-color: darkgoldenrod;
+	background-image: url(/style/bar2_yellow.bmp);
+	background-color: rgba(53, 61, 13, 0.5);
+	background-size: contain;
+	background-repeat: repeat-x;
 }
 
 body{
 	background-color: rgb(50, 95, 41);
 	background-image: url("/favicon.gif"), url("style/square2.png");
-	background-size: 48px, contain;
+	background-size: 56px, contain;
 	background-position: bottom right, left top;
 	background-repeat: no-repeat, repeat;
 	
@@ -42,21 +45,23 @@ p {
 	margin-right: 0.1%;
 	margin-bottom: 0.25%;
 	margin-top: 0.25%;
+	list-style-type: none;
 }
 
 div {
 	color: floralwhite;
 	font-size:23px;
-	margin-left: 6%;
-	margin-right: 6%;
+	margin-left: 10%;
+	margin-right: 10%;
 	margin-bottom: 0.65%;
 	margin-top: 0.65%;
 	padding: 15px;
-	border-width: 2px;
+	border-width: 1.5px;
 	border-style: solid;
-	border-radius: 5px;
-	border-color: lightseagreen;
-	background-color: rgb(35, 36, 30, 0.3);
+	border-radius: 9px;
+	border-color: seagreen;
+	background-color: rgba(28, 29, 24, 0.7);
+	list-style-type: none;
 }
 
 name{
@@ -92,7 +97,7 @@ a {
 	padding: 2px;
 	border-style: solid;
 	border-width: 1.5px;
-	border-radius: 3px;
+	border-radius: 10px;
 }
 
 li a{
@@ -116,22 +121,23 @@ li a{
 
 nav {
 	background-color: darkslategray;
+	border-color: lightseagreen;
 	background-image: url("style/Bitmap102a.bmp");
 	background-repeat: repeat-x;
-	background-size: fill;
+	background-size: contain;
 	background-size: 100%;
 	text-align: center;
 	list-style-type: none;
 	display: block;
 	line-height: 0.5;
 	padding: 1px;
-	margin-left: 6%;
-	margin-right: 6%;
-	margin-bottom: 0.2%;
-	margin-top: 0.2%;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 0.4%;
+	margin-top: 0.4%;
 	border-style: solid;
-	border-width: 1.5px;
-	border-radius: 3px;
+	border-width: 1px;
+	border-radius: 9px;
 	position: -webkit-sticky; /* Safari */
 	position: sticky;
 	overflow: hidden;
@@ -191,7 +197,7 @@ nav li a {
 	border-style: solid;
 	border-width: 2px;
 	border-radius: 5px;
-	background-image: url("style/bar1.bmp");
+	background-image: url("style/bg_navbar.bmp");
 	background-size: fill;
 	background-size: '100%';
 	background-position: center;
@@ -211,22 +217,22 @@ nav li a:hover {
 	font-size:21px;
 	border-width: 1px;
 	border-radius: 5px;
-	background-image: url("style/bar2.bmp");
-	background-size: fill;
+	background-image: url("style/bar2_blue.bmp");
+	background-size:cover;
 	background-position: center;
 	background-clip: border-box;
   }
 
 
 img {
-	border-radius: 5px;
-	border-width: 1.5px;
+	border-radius: 6px;
+	border-width: 2px;
 	border-style: solid;
 	border-color: rgba(179, 179, 179, 0.568);
 }
 iframe {
-	border-radius: 5px;
-	border-width: 1.5px;
+	border-radius: 6px;
+	border-width: 2px;
 	border-style: solid;
 	border-color: rgba(179, 179, 179, 0.568);
 }
