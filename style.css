@@ -29,10 +29,10 @@ h2 {
 
 body{
 	background-color: rgb(50, 95, 41);
-	background-image: url("style/square2.png");
-	background-size: contain;
-	background-position: left top;
-	background-repeat: repeat;
+	background-image: url("/favicon.gif"), url("style/square2.png");
+	background-size: 48px, contain;
+	background-position: bottom right, left top;
+	background-repeat: no-repeat, repeat;
 	
 }
 
