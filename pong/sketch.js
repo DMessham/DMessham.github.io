@@ -160,33 +160,33 @@ function move(){//basic colllision logic
       if(P2.y<height-P2.sizeY){P2.y=P2.y+P2.ndy;}
     }
   
-  if (ball.x + ball.size >= width){//reset ball if paddle2 miss
+  if ((ball.x + ball.size)+ball.ndx*ball.timeMult >= width){//reset ball if paddle2 miss
     ball.x = windowWidth/2;y0 = windowHeight/2;
     P1.score++
   }
   
-  else if (ball.x - ball.size <= 0){//reset ball if paddle1 miss
+  else if ((ball.x - ball.size)+ball.ndx*ball.timeMult <= 0){//reset ball if paddle1 miss
     ball.x = windowWidth/2;y0 = windowHeight/2;
     P2.score++
   }
   
-  else if (ball.x-P1.sizeX<P1.x && ball.y>P1.y && ball.y<(P1.y+P1.sizeY)){//change direction if ball touches paddle
+  else if ((ball.x-P1.sizeX)*ball.timeMult<P1.x && ball.y>P1.y && ball.y<(P1.y+P1.sizeY)){//change direction if ball touches paddle
     ball.dx=-ball.dx;
-    ball.x += ball.dx*round(deltaTime/((1/refresh)*600))*ball.timeMult;//increase x by dx every time the screen redraws
+    ball.x += ball.dx*round(deltaTime/((1/refresh)*600)*ball.timeMult);//increase x by dx every time the screen redraws
   }
-  else if (ball.x+P2.sizeX>P2.x && ball.y>P2.y && ball.y<(P2.y+P2.sizeY)){//change direction if ball touches paddle
+  else if ((ball.x+P2.sizeX)+ball.timeMult>P2.x && ball.y>P2.y && ball.y<(P2.y+P2.sizeY)+ball.timeMult){//change direction if ball touches paddle
     ball.dx=-ball.dx;
-    ball.x += ball.dx*round(deltaTime/((1/refresh)*600))*ball.timeMult;//increase x by dx every time the screen redraws
+    ball.x += ball.dx*round(deltaTime/((1/refresh)*600)*ball.timeMult);//increase x by dx every time the screen redraws
   }
   else{
-    ball.x += ball.dx*round(deltaTime/((1/refresh)*600))*ball.timeMult;//increase x by dx every time the screen redraws
+    ball.x += ball.dx*round(deltaTime/((1/refresh)*600)*ball.timeMult);//increase x by dx every time the screen redraws
   }
   
-  if (ball.y + ball.size >= height || ball.y - ball.size <= 0){//change direction if the centre of the ball is within radius of the edge of y, and change the color
+  if ((ball.y + ball.size)+ball.dy*ball.timeMult>= height || (ball.y - ball.size)+ball.dy*ball.timeMult <= 0){//change direction if the centre of the ball is within radius of the edge of y, and change the color
     ball.dy=-ball.dy;
-    ball.y += ball.dy*round(deltaTime/((1/refresh)*600))*ball.timeMult;//move in y axis
+    ball.y += ball.dy*round(deltaTime/((1/refresh)*600)*ball.timeMult);//move in y axis
   }
-  ball.y += ball.dy*round(deltaTime/((1/refresh)*600))*ball.timeMult;//move in y axis
+  ball.y += ball.dy*round(deltaTime/((1/refresh)*600)*ball.timeMult);//move in y axis
 
   //ALL THE AI MODES THAT ARE COMMENTED OUT ARE BROKEN IN SOME MAJOR WAY
   if(P2.difficulty==='impossible'){P2.y += round(map(ball.y, P2.y-(P2.sizeY/2), P2.y+(P2.sizeY*2)+(windowHeight/2)-50, 0,windowHeight-P2.sizeY)-(P2.sizeY/1))};//very hard
