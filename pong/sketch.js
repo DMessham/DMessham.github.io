@@ -13,13 +13,11 @@ let ball = {
   dy:3, //inital speed Y
   ndx:1, //speed modifier X
   ndy:1, //speed modifier Y
-  timeMult:0.75, // time multiplyer
+  timeMult:0.7, // time based speed multiplyer
   size:15, //initial size
   sizeX:15,
   sizeY:15,
   speed:1,//combined speed for horiz & vert
-  speedX:0,
-  speedY:0,
 };
 
 let P1 = {
@@ -33,9 +31,7 @@ let P1 = {
   sizeX:17.5,
   sizeY:160, //initial size for x and y(squares)
   speed:1,//combined speed for horiz & vert
-  score:0,
-  speedX:0,
-  speedY:0,
+  score:0,//player 1 score
 };
 
 
@@ -47,14 +43,12 @@ let P2 = {
   ndx:5, //speed modifier X
   ndy:5, //speed modifier Y
   oldY:100, // position
-  difficulty:0,
+  difficulty:'medium',
   sizeX:17.5,
   sizeY:160, //initial size for x and y(squares)
   speed:1,//combined speed for horiz & vert
-  score:0,
-  speedX:0,
-  speedY:0,
-  difftime:0
+  score:0,//player 2 score
+  difftime:0//time since last difficulty change
 };
 
 //standard object stats
@@ -68,7 +62,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(refresh);
   background(12,35,12);
-  strokeWeight(0);
+  noStroke()
   fill(168)
   colorMode(HSB);
   imageMode(CENTER);
@@ -86,6 +80,7 @@ function setup() {
 
 function windowResized(){
   createCanvas(windowWidth, windowHeight);
+  noStroke()
   ball.ndx = round(dist(0,0,windowWidth,windowHeight)/730);
   ball.ndy = round(dist(0,0,windowWidth,windowHeight)/730);
   P1.speedX = round(dist(0,0,windowWidth,windowHeight)/140);
@@ -119,16 +114,16 @@ function bg(){
   background(bgHue, bgSat, bgBright);//redraw the bg to ensure that no trails happen
   for (let x = 0; x < width; x += 34) {
     for (let y = 0; y < height; y += 34) {
-      let bgEffect = int(dist(x, y, ball.x, ball.y));
+      let bgEffect = 1+int(dist(x, y, ball.x, ball.y));
       colorMode(HSB);
-      fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.8,0.1));
+      fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.9,0.5));
       rect(x, y, 17);
     }
   }
 
 }
 function move(){//basic colllision logic
-  ball.timeMult = 0.75+(millis()/(1000*100));
+  if(ball.timeMult<5.5){ball.timeMult = 0.75+(millis()/(1000*100))};//ball speed multiplication based off time
   if (keyIsDown(81)){//TOGGLE AUTOMATIC PLAY ON P1 PADDLE - q
     P1.autoplay = !P1.autoplay;}
   // else if(keyIsDown(69)&&(millis()-P2.diffTime)<500){//change ai difficulty - e
@@ -137,15 +132,16 @@ function move(){//basic colllision logic
   //   if(P2.difficulty >4){
   //     P2.difficulty=0;}
   //}
-    else if (keyIsDown(48)){P2.difficulty = 'off';}
+    else if (keyIsDown(48)){P2.difficulty = 'off';}//difficulty buttons
     else if (keyIsDown(49)){P2.difficulty = 'off';}
     else if (keyIsDown(50)){P2.difficulty = 'easy';}
     else if (keyIsDown(51)){P2.difficulty = 'medium';}
     else if (keyIsDown(52)){P2.difficulty = 'hard';}
     else if (keyIsDown(53)){P2.difficulty = 'impossible';}
-    
+    else if (keyIsDown(54)){P2.difficulty = 'buggy';}
+    else if (keyIsDown(55)){P2.difficulty = 'hardAlt';}
 
-  else if (keyIsDown(87)){
+  else if (keyIsDown(87)){//movement keys
       if(P1.y>0){P1.y=P1.y-P1.ndy};
     }
     else if (keyIsDown(83)){
@@ -170,11 +166,11 @@ function move(){//basic colllision logic
     P2.score++
   }
   
-  else if ((ball.x-P1.sizeX)*ball.timeMult<P1.x && ball.y>P1.y && ball.y<(P1.y+P1.sizeY)){//change direction if ball touches paddle
+  else if ((ball.x-P1.sizeX)+ball.sizeX*ball.timeMult<P1.x && ball.y>P1.y && ball.y<(P1.y+P1.sizeY)){//change direction if ball touches paddle
     ball.dx=-ball.dx;
     ball.x += ball.dx*round(deltaTime/((1/refresh)*600)*ball.timeMult);//increase x by dx every time the screen redraws
   }
-  else if ((ball.x+P2.sizeX)+ball.timeMult>P2.x && ball.y>P2.y && ball.y<(P2.y+P2.sizeY)+ball.timeMult){//change direction if ball touches paddle
+  else if ((ball.x+P2.sizeX)+ball.sizeX*ball.timeMult>P2.x && ball.y>P2.y && ball.y<(P2.y+P2.sizeY)+ball.timeMult){//change direction if ball touches paddle
     ball.dx=-ball.dx;
     ball.x += ball.dx*round(deltaTime/((1/refresh)*600)*ball.timeMult);//increase x by dx every time the screen redraws
   }
@@ -193,11 +189,12 @@ function move(){//basic colllision logic
   //P2.y += round(map(ball.y, P2.oldY-(P2.sizeY), P2.oldY+(P2.sizeY*2),0,(windowHeight-P2.sizeY)));//still kinda janky
   //P2.y = (map(ball.y, P2.y+(P2.sizeY/2)-dist(ball.x,0,P2.x,0), P2.y+(P2.sizeY/2)+dist(0,ball.y,0,P2.y), 0,windowHeight-(P2.sizeY/2)));//janky af
   if(P2.difficulty==='easy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.oldY-(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), P2.oldY+(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), 0 ,windowHeight-P2.sizeY));}}//easy ai
-  if(P2.difficulty==='medium'){if(ball.x>(width/3)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/1.5)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/1.5)+(width),P2.oldY)), 0 ,windowHeight-P2.sizeY));}}//medium
-  if(P2.difficulty==='hard'){if(ball.x>(width/1.5)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)), 0 ,windowHeight-P2.sizeY)-P2.sizeY/2);}}//hard
-  //P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x)+(width/2),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x)+(width/2),P2.oldY)), 0 ,windowHeight-P2.sizeY));//med, broken af
-  //P2.y = ball.y-(P2.sizeY/2)// automove paddle 2 (simple, unfair and boring)
-  if(P1.autoplay){P1.y = ball.y-(P1.sizeY/2);}// automove paddle 1 (for testing ai longterm)
+  if(P2.difficulty==='medium'){if(ball.x>(width/3)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), -P2.sizeY ,windowHeight+(P2.sizeY/2)));}}//medium
+  if(P2.difficulty==='hard'){if(ball.x>(width/1.5)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)),P2.sizeY/3 ,windowHeight-P2.sizeY/3))-P2.sizeY;}}//hard
+  if(P2.difficulty==='hardAlt'){if(ball.x>(width/8)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.sizeY ,(windowHeight)+P2.sizeY));}}//hardAlt
+  if(P2.difficulty==='buggy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x)+(P2.sizeY/2),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x)-(P2.sizeY/2),P2.oldY)), 0 ,windowHeight))};}//med, very buggy
+  if(P1.autoplay){P1.y = ball.y-(P1.sizeY/2);}{P1.y += round(map(ball.y, P1.y-(P1.sizeY/2), P1.y+(P1.sizeY*2)+(windowHeight/2)-50, 0,windowHeight-P1.sizeY)-(P1.sizeY/1))};
+  // automove paddle 1 (for testing ai longterm)
 
   if(ball.x>width+15 || ball.x<-15 ||ball.y>height+15 ||ball.y<-15){//return ball to centre if outside bounds
     ball.x=width/2;
@@ -207,13 +204,13 @@ function move(){//basic colllision logic
 }
 
 function txtInfo(){
-  let infoString = "Daniel Messham's Pong clone\nComp sci 30, Mon Oct 4th, '21\nAi, P2.difficulty: "+P2.difficulty+', '+ball.timeMult;//information string used for author info+dufficulty info
+  let infoString = "Daniel Messham's Pong clone\nComp sci 30, Mon Oct 4th, '21\nAi, Speed: "+P2.difficulty+', '+ball.timeMult;//information string used for author info+dufficulty info
 
   fill(100, 0.5)//set color for text
   textSize(20)//set text for general info
   text((infoString),60,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
   textSize(17)//set size for debug info
-  text(("DEBUG/PERFORMANCE INFO\nBall pos (X,Y): "+ball.x+", "+ball.y+'\nP1y (Top,Btm): ('+P1.y+','+(P1.y+P1.sizeY)+')\nP2y (Top,Btm): ('+P2.y+','+(P2.y+P2.sizeY)+')\n\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+round((millis()-startTime)/1000,1)+'Seconds\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+round((1/refresh)*1000,2)+'ms\nWHY WONT THE AI JUST WORK?\n'),60,110);//print changing info to screen, have to redraw every time since it updates in real time
+  text(("DEBUG/PERFORMANCE INFO\nBall pos (X,Y): "+ball.x+", "+ball.y+'\nP1y (Top,Btm): ('+P1.y+','+(P1.y+P1.sizeY)+')\nP2y (Top,Btm): ('+P2.y+','+(P2.y+P2.sizeY)+')\n\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+round((millis()-startTime)/1000,1)+'Seconds\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+round((1/refresh)*1000,2)+'ms\n0,1-4 control ai difficulty on P2 paddle\nq toggles autoplay on P1 paddle\nSome of the ai settings are still quite buggy'),60,110);//print changing info to screen, have to redraw every time since it updates in real time
 }
 
 function hud(){
