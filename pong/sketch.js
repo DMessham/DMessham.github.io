@@ -208,14 +208,14 @@ function txtInfo(){
   fill(100, 0.5)//set color for text
   textSize(20)//set text for general info
   text((infoString),60,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
-  textSize(18)//set size for debug info
+  textSize(17.5)//set size for debug info
   text(("DEBUG/PERFORMANCE INFO\nP2 Ai: "+P2.difficulty+', P1 AI:'+P1.autoPlay+', time-Speed mult.'+ball.timeMult+"\nBall pos (X,Y): "+ball.x+", "+ball.y+'\nP1y (Top,Btm): ('+P1.y+','+(P1.y+P1.sizeY)+')\nP2y (Top,Btm): ('+P2.y+','+(P2.y+P2.sizeY)+')\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+round((1/refresh)*1000,2)+'ms\nThe easier ai settings were horribly broken by physics changes, so i removed them.\n\nCONTROLS\npress 1 & 5 to turn p2 ai off and on, k&l for p1 ai. w&s fpr p1 paddle,\nUp and down for P2. refresh to restart, there is no score limit for either side.'),60,95);//print changing info to screen, have to redraw every time since it updates in real time
 }
 
 function hud(){
-  textSize(77);
+  textSize(67);
   text(P1.score,windowWidth*(1/3),windowHeight*(4/5));
   text(P2.score,windowWidth*(2/3),windowHeight*(4/5));
-  textSize(42);
+  textSize(40);
   text('Time: '+round((millis()-startTime)/1000,1), width/2.4,height/12)
 }
