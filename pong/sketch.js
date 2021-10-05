@@ -1,7 +1,7 @@
 // Pong
 // Daniel Messham
 // mon oct 4th
-// bonus stuff: ai, background, difficulty settings for ai, game speed can adjust to framerate, 
+// bonus stuff: resize handling, ai, background, difficulty settings for ai, game speed can adjust to framerate, gets harder as time goes on.
 //TODO: add more balenced ai
 let refresh = 60//target framerate, used to calc realfps
 let startTime, millisecond = 0;//initilaize debug values
