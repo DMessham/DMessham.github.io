@@ -27,7 +27,7 @@ let P1 = {
   dy:30, //inital speed Y
   ndy:5, //speed modifier X
   ndy:5, //speed modifier Y
-  autoPlay:0, // automove player
+  autoPlay:1, // automove player
   sizeX:17.5,
   sizeY:160, //initial size for x and y(squares)
   speed:1,//combined speed for horiz & vert
@@ -123,25 +123,18 @@ function bg(){
 
 }
 function move(){//basic colllision logic
-  if(ball.timeMult<5.5){ball.timeMult = 0.75+(millis()/(1000*100))};//ball speed multiplication based off time
-  // else if(keyIsDown(69)&&(millis()-P2.diffTime)<500){//change ai difficulty - e
-  //   P2.difficulty += 1;
-  //   P2.diffTime=millis();
-  //   if(P2.difficulty >4){
-  //     P2.difficulty=0;}
-  //}
+  if(ball.timeMult<5.5){ball.timeMult = 0.75+(millis()/(1000*10000))};//ball speed multiplication based off time played
   if (keyIsDown(75)){P1.autoPlay = true;}//turn on autoplay
   else if (keyIsDown(76)){P1.autoPlay = false;}//turn off autoplay
-  //if (keyIsDown(76)){P1.autoPlay = !P1.autoPlay;}//toggle autoplay
 
   if (keyIsDown(48)){P2.difficulty = 'off';}//difficulty buttons
     else if (keyIsDown(49)){P2.difficulty = 'off';}
-    else if (keyIsDown(50)){P2.difficulty = 'easy';}
-    else if (keyIsDown(51)){P2.difficulty = 'medium';}
-    else if (keyIsDown(52)){P2.difficulty = 'hard';}
+    //else if (keyIsDown(50)){P2.difficulty = 'easy';}
+    //else if (keyIsDown(51)){P2.difficulty = 'medium';}
+    //else if (keyIsDown(52)){P2.difficulty = 'hard';}
     else if (keyIsDown(53)){P2.difficulty = 'very hard';}
-    else if (keyIsDown(54)){P2.difficulty = 'buggy';}
-    else if (keyIsDown(55)){P2.difficulty = 'hardAlt';}
+    //else if (keyIsDown(54)){P2.difficulty = 'buggy';}
+    //else if (keyIsDown(55)){P2.difficulty = 'hardAlt';}
 
   if (keyIsDown(87)){//movement keys
       if(P1.y>0){P1.y=P1.y-P1.ndy};
@@ -186,23 +179,23 @@ function move(){//basic colllision logic
   }
   ball.y += ball.dy*round(deltaTime/((1/refresh)*600)*ball.timeMult);//move in y axis
 
-  //ALL THE AI MODES THAT ARE COMMENTED OUT ARE BROKEN IN SOME MAJOR WAY
+  //ALL THE AI MODES THAT ARE COMMENTED OUT ARE BROKEN IN SOME MAJOR WAY THAT RESULTS IN THEM BEING UNUSABLE
   if(P2.difficulty==='very hard'){P2.y += round(map(ball.y, P2.y-(P2.sizeY/2), P2.y+(P2.sizeY*2)+(windowHeight/2)-50, 0,windowHeight-P2.sizeY)-(P2.sizeY/1))};//very hard
   //P2.y += round(map(ball.y, P2.oldY-(P2.sizeY), P2.oldY+(P2.sizeY*2),0,(windowHeight-P2.sizeY)));//still kinda janky
   //P2.y = (map(ball.y, P2.y+(P2.sizeY/2)-dist(ball.x,0,P2.x,0), P2.y+(P2.sizeY/2)+dist(0,ball.y,0,P2.y), 0,windowHeight-(P2.sizeY/2)));//janky af
-  if(P2.difficulty==='easy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.oldY-(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), P2.oldY+(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), 0 ,windowHeight-P2.sizeY));}}//easy ai
+  //if(P2.difficulty==='easy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.oldY-(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), P2.oldY+(dist(width,ball.y,(ball.x*2)+(width),P2.oldY)), 0 ,windowHeight-P2.sizeY));}}//easy ai
 
-  if(P2.difficulty==='medium'){if(ball.x>(width/3)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), -P2.sizeY ,windowHeight+(P2.sizeY/2)));}}//medium
+  //if(P2.difficulty==='medium'){if(ball.x>(width/3)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/2)+(width),P2.oldY)), -P2.sizeY ,windowHeight+(P2.sizeY/2)));}}//medium
 
-  if(P2.difficulty==='hard'){if(ball.x>(width/1.5)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)),P2.sizeY/3 ,windowHeight-P2.sizeY/3))-P2.sizeY;}}//hard
+  //if(P2.difficulty==='hard'){if(ball.x>(width/1.5)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/3)+(width),P2.oldY)),P2.sizeY/3 ,windowHeight-P2.sizeY/3))-P2.sizeY;}}//hard
 
-  if(P2.difficulty==='hardAlt'){if(ball.x>(width/8)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.sizeY ,(windowHeight)+P2.sizeY));}}//hardAlt
+  //if(P2.difficulty==='hardAlt'){if(ball.x>(width/8)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x/4)+(width),P2.oldY)), P2.sizeY ,(windowHeight)+P2.sizeY));}}//hardAlt
 
-  if(P2.difficulty==='buggy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x)+(P2.sizeY/2),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x)-(P2.sizeY/2),P2.oldY)), 0 ,windowHeight))};}//med, very buggy
+  //if(P2.difficulty==='buggy'){if(ball.x>(width/2)){P2.y = round(map(ball.y, P2.y-(dist(width,ball.y,(ball.x)+(P2.sizeY/2),P2.oldY)), P2.y+(dist(width,ball.y,(ball.x)-(P2.sizeY/2),P2.oldY)), 0 ,windowHeight))};}//med, very buggy
 
-  if(P1.autoPlay===true){P1.y += round(map(ball.y, P1.y-(P1.sizeY/2),P1.y+(P1.sizeY*2)+(windowHeight/2)-50,0,windowHeight-P1.sizeY)-(P1.sizeY/1))}// automove paddle 1 (for testing ai longterm)
+  if(P1.autoPlay===true){P1.y += round(map(ball.y, P1.y-(P1.sizeY/2),P1.y+(P1.sizeY*2)+(windowHeight/2)-50,0,windowHeight-P1.sizeY)-(P1.sizeY/1))}// automove paddle 1 (for autoplay)
 
-  if(ball.x>width+15 || ball.x<-15 ||ball.y>height+15 ||ball.y<-15){//return ball to centre if outside bounds
+  if(ball.x>width+15 || ball.x<-15 ||ball.y>height+15 ||ball.y<-15){//return ball to centre if outside edges of screen
     ball.x=width/2;
     ball.y=height/2;
   }
@@ -210,17 +203,19 @@ function move(){//basic colllision logic
 }
 
 function txtInfo(){
-  let infoString = "Daniel Messham's Pong clone\nComp sci 30, Mon Oct 4th, '21\nAi, Speed: "+P2.difficulty+', autoplay:'+P1.autoPlay+', '+ball.timeMult;//information string used for author info+dufficulty info
+  let infoString = "Daniel Messham's Pong clone\nComp sci 30, Mon Oct 4th, '21\nP2 Ai: "+P2.difficulty+', P1 AI:'+P1.autoPlay+', time-Speed mult.'+ball.timeMult;//information string used for author info+dufficulty info
 
   fill(100, 0.5)//set color for text
   textSize(20)//set text for general info
   text((infoString),60,30);//print basic info to screen, have to redraw every time since i cant include it in the bg
   textSize(17)//set size for debug info
-  text(("DEBUG/PERFORMANCE INFO\nBall pos (X,Y): "+ball.x+", "+ball.y+'\nP1y (Top,Btm): ('+P1.y+','+(P1.y+P1.sizeY)+')\nP2y (Top,Btm): ('+P2.y+','+(P2.y+P2.sizeY)+')\n\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames, '+round((millis()-startTime)/1000,1)+'Seconds\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+round((1/refresh)*1000,2)+'ms\n0,1-4 control ai difficulty on P2 paddle\nk&l toggle autoplay on P1 paddle\nThe easier ai settings are still quite buggy, if you want to play, use easy or very hard'),60,110);//print changing info to screen, have to redraw every time since it updates in real time
+  text(("DEBUG/PERFORMANCE INFO\nBall pos (X,Y): "+ball.x+", "+ball.y+'\nP1y (Top,Btm): ('+P1.y+','+(P1.y+P1.sizeY)+')\nP2y (Top,Btm): ('+P2.y+','+(P2.y+P2.sizeY)+')\n\nCurrent FPS:   '+round((refresh/deltaTime)*20,2)+"fps\nTarget FPS:     "+refresh+'fps\nRendered:       '+frameCount+' Frames\nCurrent Delta: '+round((deltaTime)*1, 2)+'ms\nTarget Delta:   '+round((1/refresh)*1000,2)+'ms\nThe easier ai settings were horribly inconsistant, so i removed them,\nCONTROLS\n--------------------------\npress 1 & 5 to turn p2 ai off and on, k&l for p1 ai. w&s fpr p1 paddle,\n up and down for P2 refresh to restart, there is no score limit for either side.'),60,110);//print changing info to screen, have to redraw every time since it updates in real time
 }
 
 function hud(){
   textSize(77);
   text(P1.score,windowWidth*(1/3),windowHeight*(4/5));
   text(P2.score,windowWidth*(2/3),windowHeight*(4/5));
+  textSize(47);
+  text(round((millis()-startTime)/1000,1)+'Secs.', width/2.5,height/8)
 }
