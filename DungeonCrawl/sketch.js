@@ -7,32 +7,18 @@
 
 
 let refresh = 60//target framerate, used to calc realfps
-let startTime, millisecond = 0;//initilaize debug values
+let millisecond = 0;//initilaize debug values
 
-let enemys = [[0,0,1][0,0,1]]
-let objects = [[0,1,2][0,1,2]]
-let terrain = [[0,1,2][0,1,2]]
+let gridX = 100;
+let gridY = 100;
 
+let grid = []
 //standard object stats
 
 let bgHue=(128);//Backgrond hue
 let bgSat=(128);//Backgrond saturation
 let bgBright=(18);//Background brightness
 
-
-let levelTerrain = {
-  x:1, //initial position
-  y:1, //initial position
-  texture:3, //inital speed X
-  property:3, //inital speed Y
-  ndx:1, //x collision
-  ndy:1, //Y collision
-  timeMult:0.7, // time based speed multiplyer
-  size:15, //initial size
-  sizeX:15,
-  sizeY:15,
-  index:0,
-};
 
 let levelObject = {
   x:3, //initial position
@@ -83,13 +69,12 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(refresh);
   background(12,35,12);
-  noStroke()
+  //noStroke()
   fill(168)
   colorMode(HSB);
   imageMode(CENTER);
   noSmooth();
-  
-  startTime = millis();
+  grid = CreateRandom2dArray(gridX,gridY);
 }
 
 function windowResized(){
@@ -100,29 +85,66 @@ function windowResized(){
 
 function draw() {
   bg()
-  
-  txtInfo();
-  hud();
-  move();
-  
-  fill(98,0.4);//
-  rect(player.x-player.sizeX,player.y,player.sizeX, player.sizeY);//draw player paddle
-  
-  fill(98,0.4);//
-  rect(enemy.x,enemy.y,enemy.sizeX, enemy.sizeY);//draw ai paddle
-  
+  displayGrid()
   frameDelta = frameCount//*deltaTime/1000
 
 }
 
 function bg(){
-  background(bgHue, bgSat, bgBright);//redraw the bg to ensure that no trails happen
-  for (let x = 30; x < width-30; x += 30) {
-    for (let y = 30; y < height-30; y += 30) {
-      let bgEffect = 1+int(dist(x, y, player.x, player.y));
-      colorMode(HSB);
-      fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.9,0.5));
-      rect(x, y, 25);
+  //background(bgHue, bgSat, bgBright);//redraw the bg to ensure that no trails happen
+  background(12,35,12);
+  // for (let x = 30; x < width-30; x += 30) {
+  //   for (let y = 30; y < height-30; y += 30) {
+  //     let bgEffect = 1+int(dist(x, y, player.x, player.y));
+  //     colorMode(HSB);
+  //     fill(bgHue,bgSat*2,bgBright*2,map(bgEffect,0,128,0.9,0.5));
+  //     rect(x, y, 25);
+  //   }
+  // }
+}
+
+function CreateEmpty2dArray(row, col){
+  let grid = [];
+  for(let y=0; y<row; y++){
+    grid.push([])
+    for(let x=0; x<col; x++){
+      grid[y].push(0);
+    }
+  }
+  return grid;
+}
+
+function CreateRandom2dArray(row, col){
+  let grid = [];
+  for(let y=0; y<row; y++){
+    grid.push([])
+    for(let x=0; x<col; x++){
+      if(random(10)<=5){
+        grid[y].push(1);
+      }
+      else{grid[y].push(0);}
+    }
+  }
+  return grid;
+}
+
+function KeyIsPressed(){
+  if(keyCode=83){
+    CreateRandom2dArray(row,col);
+    displayGrid();
+  }
+}
+
+function displayGrid(){
+  let xSize = width/gridX;
+  //let ySize = height/gridY;
+  let ySize = xSize;
+
+  for(let y=0; y<gridY; y++){
+    for(let x=0; x<gridX; x++){
+      if (grid[y][x]===0){fill('white');}
+      else if (grid[y][x]===1){fill('black');}
+      rect(x*xSize, y*ySize, xSize,ySize);
     }
   }
 }
