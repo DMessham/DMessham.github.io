@@ -13,6 +13,13 @@ let gridX = 100;
 let gridY = 100;
 
 let grid = []
+
+let mouseGridX = 0
+let mouseGridY = 0
+
+let xSize = 0;
+let ySize = xSize;
+
 //standard object stats
 
 let bgHue=(128);//Backgrond hue
@@ -75,6 +82,7 @@ function setup() {
   imageMode(CENTER);
   noSmooth();
   grid = CreateRandom2dArray(gridX,gridY);
+  
 }
 
 function windowResized(){
@@ -85,9 +93,24 @@ function windowResized(){
 
 function draw() {
   bg()
+  
   displayGrid()
   frameDelta = frameCount//*deltaTime/1000
 
+}
+
+function mousePressed(){
+  let xSize = width/gridX;
+  //let ySize = height/gridY;
+  let ySize = xSize;
+  
+  mouseGridX = Math.floor(mouseX/xSize)
+  mouseGridY = Math.floor(mouseY/ySize)
+
+  if(grid[MouseGridX][MouseGridY] === 1){
+    grid[MouseGridX][MouseGridY] = 0;}
+  if(grid[MouseGridX][MouseGridY] === 0){
+    grid[MouseGridX][MouseGridY] = 1;}
 }
 
 function bg(){
@@ -136,10 +159,6 @@ function KeyIsPressed(){
 }
 
 function displayGrid(){
-  let xSize = width/gridX;
-  //let ySize = height/gridY;
-  let ySize = xSize;
-
   for(let y=0; y<gridY; y++){
     for(let x=0; x<gridX; x++){
       if (grid[y][x]===0){fill('white');}
