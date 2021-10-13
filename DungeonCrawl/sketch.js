@@ -10,7 +10,7 @@ let refresh = 60//target framerate, used to calc realfps
 let millisecond = 0;//initilaize debug values
 
 let gridX = 100;
-let gridY = 100;
+let gridY = 60;
 
 let grid = []
 
@@ -72,17 +72,23 @@ let enemy = {
 
 //standard object stats
 
+function preload(){
+  ding = loadSound('keemstar.mp3');
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(refresh);
   background(12,35,12);
   //noStroke()
-  fill(168)
+  fill(18)
   colorMode(HSB);
   imageMode(CENTER);
   noSmooth();
-  grid = CreateRandom2dArray(gridX,gridY);
-  
+  xSize = width/gridX;
+  ySize = height/gridY;
+  grid = CreateEmpty2dArray(gridX,gridY);
+  ding.playMode('sustain');
 }
 
 function windowResized(){
@@ -92,25 +98,26 @@ function windowResized(){
 }
 
 function draw() {
-  bg()
-  
+  //bg()
   displayGrid()
   frameDelta = frameCount//*deltaTime/1000
 
 }
 
 function mousePressed(){
-  let xSize = width/gridX;
-  //let ySize = height/gridY;
-  let ySize = xSize;
+  //xSize = width/gridX;
+  //ySize = height/gridY;
+  //ySize = xSize;
   
   mouseGridX = Math.floor(mouseX/xSize)
   mouseGridY = Math.floor(mouseY/ySize)
 
-  if(grid[MouseGridX][MouseGridY] === 1){
-    grid[MouseGridX][MouseGridY] = 0;}
-  if(grid[MouseGridX][MouseGridY] === 0){
-    grid[MouseGridX][MouseGridY] = 1;}
+  if(grid[mouseGridX][mouseGridY] === 1){
+    grid[mouseGridX][mouseGridY] = 0;}
+  if(grid[mouseGridX][mouseGridY] === 0){
+    grid[mouseGridX][mouseGridY] = 1;}
+  ding.play();
+  displayGrid()
 }
 
 function bg(){
@@ -161,8 +168,8 @@ function KeyIsPressed(){
 function displayGrid(){
   for(let y=0; y<gridY; y++){
     for(let x=0; x<gridX; x++){
-      if (grid[y][x]===0){fill('white');}
-      else if (grid[y][x]===1){fill('black');}
+      if (grid[x][y]===0){fill(255);}
+      else if (grid[x][y]===1){fill(20);}
       rect(x*xSize, y*ySize, xSize,ySize);
     }
   }
