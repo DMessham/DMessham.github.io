@@ -113,9 +113,11 @@ function mousePressed(){
   mouseGridY = Math.floor(mouseY/ySize)
 
   if(grid[mouseGridX][mouseGridY] === 1){
-    grid[mouseGridX][mouseGridY] = 0;}
-  if(grid[mouseGridX][mouseGridY] === 0){
-    grid[mouseGridX][mouseGridY] = 1;}
+    grid[mouseGridX][mouseGridY] = 0
+  }
+  else if(grid[mouseGridX][mouseGridY] === 0){
+    grid[mouseGridX][mouseGridY] = 1
+  }
   ding.play();
   displayGrid()
 }
