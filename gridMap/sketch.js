@@ -99,15 +99,14 @@ function draw() {
 }
 
 function mousePressed(){
-  //xSize = width/gridX;
-  //ySize = height/gridY;
-  //ySize = xSize;
-  
+
   mouseGridX = Math.floor(mouseX/xSize)
   mouseGridY = Math.floor(mouseY/ySize)
 
-  swap(mouseGridX, mouseGridY)
-  //ding.play();
+  if(grid[MouseGridX][MouseGridY] === 1){
+    grid[MouseGridX][MouseGridY] = 0;}
+  if(grid[MouseGridX][MouseGridY] === 0){
+    grid[MouseGridX][MouseGridY] = 1;}
   displayGrid()
 }
 
@@ -165,8 +164,10 @@ function keyPressed(){
 function displayGrid(){
   for(let y=0; y<gridY; y++){
     for(let x=0; x<gridX; x++){
-      if (grid[x][y]===false){fill(10);}
-      else if (grid[x][y]===true){fill(200);}
+      if (grid[y][x]===0){fill('white');}
+      else if (grid[y][x]===1){fill('black');}
+      if (grid[x][y]===0){fill(255);}
+      else if (grid[x][y]===1){fill(20);}
       rect(x*xSize, y*ySize, xSize,ySize);
     }
   }
