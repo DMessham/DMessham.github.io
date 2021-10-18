@@ -8,8 +8,8 @@
 
 let refresh = 30//target framerate, used to calc realfps
 
-let gridX = 50;
-let gridY = 50;
+let gridX = 70;
+let gridY = gridX;
 
 let grid = []
 
@@ -17,6 +17,13 @@ let xSize = 10;
 let ySize = xSize;
 
 let autoPlay = false;
+
+let gun;
+
+
+function preload(){
+  //gun = loadJSON("/assets/Save/gospergun.json")//assumes grid size is 70
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -36,7 +43,9 @@ function windowResized(){
 
 function draw() {
   background(12,35,12);
-  if(autoPlay){nextTurn();}
+  if(autoPlay){
+    nextTurn();
+  }
   displayGrid();
 }
 
@@ -129,7 +138,7 @@ function CreateRandom(row, col){
   for(let y=0; y<row; y++){
     grid.push([])
     for(let x=0; x<col; x++){
-      if(random(10)<=5){
+      if(random(100)<=50){
         grid[y].push(1);
       }
       else{grid[y].push(0);}
@@ -155,6 +164,15 @@ function keyPressed(){
   else if(key==="p"){
     autoPlay=!autoPlay
   }
+  else if(key==="k"){
+    saveCsv("DMessham-JSconway.csv", grid)
+  }
+  else if(key==="l"){
+    load()
+  }
+  else if(key==="1"){
+    grid = gun;
+  }
 }
 
 function displayGrid() {
@@ -167,4 +185,59 @@ function displayGrid() {
       rect(x*xSize, y*ySize,  xSize, ySize);
     }
   }
+}
+
+
+function saveJSON(){
+  saveJSON(grid, "DMessham-conway-save.json");
+}
+
+function loadJSON(){
+  let data = []
+  
+  grid = data
+}
+
+function saveCsv(filename, rows) {//based off example from stack overflow https://stackoverflow.com/a/29304414
+  // Example data given in question text
+  var data = grid
+
+  // Building the CSV from the Data two-dimensional array
+  // Each column is separated by ";" and new line "\n" for next row
+  var csvContent ='';
+  data.forEach(function(infoArray, index) {
+    dataString = infoArray.join(',');
+    csvContent += index < data.length ? dataString + '\n' : dataString;
+  });
+
+  // The download function takes a CSV string, the filename and mimeType as parameters
+  // Scroll/look down at the bottom of this snippet to see how download is called
+  var download = function(content, fileName, mimeType) {
+    var a = document.createElement('a');
+    mimeType = mimeType || 'application/octet-stream';
+
+    if (navigator.msSaveBlob) { // IE10
+      navigator.msSaveBlob(new Blob([content], {
+        type: mimeType
+      }), fileName);
+    } else if (URL && 'download' in a) { //html5 A[download]
+      a.href = URL.createObjectURL(new Blob([content], {
+        type: mimeType
+      }));
+      a.setAttribute('download', fileName);
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } else {
+      location.href = 'data:application/octet-stream,' + encodeURIComponent(content); // only this mime type is supported
+    }
+  }
+
+  download(csvContent, 'dowload.csv', 'text/csv;encoding:utf-8');
+}
+
+function loadCSV(){
+  let data = []
+  
+  grid = data
 }
