@@ -44,6 +44,7 @@ let player = {
   weaponId:0,
   level:1,
   xp:0,
+  oldPos:0,
 };
 
 
@@ -174,11 +175,13 @@ function playerControl(){
 function playerMove(newX,newY){
   let oldX = player.x
     let oldY = player.y
-    if (grid[newY][newX]===0){
+    if (grid[newY][newX]===0||grid[newY][newX]===3||grid[newY][newX]===4){
       player.x = newX
       player.y = newY
+      grid[oldY][oldX]=player.oldPos;
+      player.oldPos = grid[newY][newX];
       grid[newY][newX] = 2;
-      grid[oldY][oldX]=0
+      
     }
     if (grid[newY][newX]===3){level++}
     displayGrid()
@@ -198,13 +201,15 @@ function displayGrid() {
       //rect(x*xSize, y*ySize,  xSize, ySize);
       if (grid[y][x] === 0) {image(grass, x*xSize, y*ySize,  xSize, ySize);}//empty
 
-      if (grid[y][x] === 1) {image(leaf, x*xSize, y*ySize,  xSize, ySize);}//wall
+      else if (grid[y][x] === 1) {image(leaf, x*xSize, y*ySize,  xSize, ySize);}//wall
 
-      if (grid[y][x] === 2) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//player
+      else if (grid[y][x] === 2) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//player
 
-      if (grid[y][x] === 3) {fill('yellow');rect(x*xSize, y*ySize,  xSize, ySize);}//goal
+      else if (grid[y][x] === 3) {fill('yellow');rect(x*xSize, y*ySize,  xSize, ySize);}//goal
 
-      if (x === player.x&&y === player.y) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//playe
+      else if (grid[y][x] === 2) {image(path, x*xSize, y*ySize,  xSize, ySize);}//path
+
+      //else if (x === player.x&&y === player.y) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//playe
       
     }
   }
