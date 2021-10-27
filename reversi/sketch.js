@@ -21,40 +21,49 @@ let autoPlay = false;
 //let level = 1
 let level1;
 
-let tile
-let wall
-let grass
-let leaf
-let dirt
-let playerSprite
+let tile;
+let wall;
+let grass;
+let leaf;
+let dirt;
+let playerSprite;
 
-let mouseGridX
-let mouseGridY
+let mouseGridX;
+let mouseGridY;
+
+//let player;
 
 let player = {
   x:1, //initial position
   y:2, //initial position
   score:0,//player 1 score
-  race:0,
-  itms:[0,0,0,0,0,0,0,0,0],
-  hp:20,
-  def:20,
-  armorId:[0,0,0,0],
-  atk:20,
-  weaponId:0,
-  level:1,
-  xp:0,
-  oldPos:0,
+  tiles:[[0,0],[20,20]]
 };
 
+let player2 = {
+  x:1, //initial position
+  y:2, //initial position
+  score:0,//player 1 score
+  tiles:[[20,0],[0,20]]
+};
 
+// class PlayerTiles{
+//   constructor(x, y, newX, newY, color, size){
+//     this.x = x;
+//     this.y = y;
+//     this.color = color;
+//     this.size = size;
+//   }
+//   move(){
+
+//   }
+//   display(){
+//     circle()
+//   }
+// }
 
 function preload(){
   level1 = loadJSON("assets/terrain/lvl1.json");//assumes grid size is 30
-  //level2 = loadJSON("assets/terrain/lvl2.json");//assumes grid size is 30
-  worldSheet='';
-  entitySheet='';
-  guiSheet='';
   tile = loadImage('assets/paving1.png');
   wall = loadImage('assets/rock2.png');
   grass = loadImage('assets/grass1.png');
@@ -78,31 +87,19 @@ function setup() {
 
 function windowResized(){
   createCanvas(windowWidth, windowHeight);
-  
-}
-
-function levelSwitch(){
-
 }
 
 function draw() {
   background(12,35,12);
+  mouseGridX = Math.floor(mouseX/xSize);
+  mouseGridY = Math.floor(mouseY/ySize);
   //nextTurn();
   playerControl();
   displayGrid();
 }
 
 function mousePressed(){
-  mouseGridX = Math.floor(mouseX/xSize);
-  mouseGridY = Math.floor(mouseY/ySize);
-
-  // if (grid[mouseGridY][mouseGridX] === 0) {
-  //   grid[mouseGridY][mouseGridX] = 1;
-  // }
-  // else if (grid[mouseGridY][mouseGridX] === 1) {
-  //   grid[mouseGridY][mouseGridX] = 0;
-  // }
-  //numInput()
+  console.log("clicked at X:"+mouseGridX + ", Y:" +mouseGridY)
 }
 
 
@@ -123,23 +120,6 @@ function CreateArray(row, col, value){
   return grid;
 }
 
-function CreateRandom(row, col){
-  xSize = windowWidth/gridX;
-  ySize = windowHeight/gridY;
-  let grid = [];
-  for(let y=0; y<row; y++){
-    grid.push([])
-    for(let x=0; x<col; x++){
-      if(random(100)<=50){
-        grid[y].push(1);
-      }
-      else{grid[y].push(0);}
-    }
-  }
-  return grid;
-}
-
-
 function keyPressed(){
   
   if(key==="e"){
@@ -147,9 +127,6 @@ function keyPressed(){
   }
   else if(key==="b"){
     grid = CreateArray(gridX, gridY, 0);
-  }
-  else if(key==="r"){
-    grid = CreateRandom(gridX,gridY);
   }
   else if(key==="k"){
     saveJSON();
@@ -160,16 +137,17 @@ function keyPressed(){
 }
 
 function playerControl(){
-  if (keyIsDown(UP_ARROW)&&player.y>0){playerMove(player.x,player.y-1);}
-  if (keyIsDown(DOWN_ARROW)&&player.y+1<gridY){playerMove(player.x,player.y+1);}
-  if (keyIsDown(LEFT_ARROW)&&player.x>0){playerMove(player.x-1,player.y);}
-  if (keyIsDown(RIGHT_ARROW)&&player.x+1<gridX){playerMove(player.x+1,player.y);}
+  // if (keyIsDown(UP_ARROW)&&player.y>0){playerMove(player.x,player.y-1);}
+  // if (keyIsDown(DOWN_ARROW)&&player.y+1<gridY){playerMove(player.x,player.y+1);}
+  // if (keyIsDown(LEFT_ARROW)&&player.x>0){playerMove(player.x-1,player.y);}
+  // if (keyIsDown(RIGHT_ARROW)&&player.x+1<gridX){playerMove(player.x+1,player.y);}
 
-  if (keyIsDown('w')){playerMove(player.x,player.y-1);}
-  if (keyIsDown('s')){playerMove(player.x,player.y+1);}
-  if (keyIsDown('a')){playerMove(player.x-1,player.y);}
-  if (keyIsDown('d')){playerMove(player.x+1,player.y);}
+  // if (keyIsDown('w')){playerMove(player.x,player.y-1);}
+  // if (keyIsDown('s')){playerMove(player.x,player.y+1);}
+  // if (keyIsDown('a')){playerMove(player.x-1,player.y);}
+  // if (keyIsDown('d')){playerMove(player.x+1,player.y);}
   numInput()
+  
 }
 
 function playerMove(newX,newY){
@@ -209,12 +187,23 @@ function displayGrid() {
 
       else if (grid[y][x] === 2) {image(path, x*xSize, y*ySize,  xSize, ySize);}//path
 
-      //else if (x === player.x&&y === player.y) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//playe
-      
+      mouseCursor(`green`)
     }
   }
 }
 
+function mouseCursor(mouseColor){
+  noFill()
+  stroke("black");
+  strokeWeight(2)
+  rect(mouseGridX*xSize+2, mouseGridY*ySize+2, xSize-4, ySize-4);
+  stroke("white");
+  strokeWeight(2)
+  rect(mouseGridX*xSize-2, mouseGridY*ySize-2, xSize+4, ySize+4);
+  strokeWeight(3)
+  stroke(mouseColor);
+  rect(mouseGridX*xSize, mouseGridY*ySize, xSize, ySize);
+}
 
 function saveJSON(){
   saveJSON(grid, "DMessham-gridJS-save.json");

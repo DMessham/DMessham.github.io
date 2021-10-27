@@ -209,12 +209,22 @@ function displayGrid() {
 
       else if (grid[y][x] === 2) {image(path, x*xSize, y*ySize,  xSize, ySize);}//path
 
-      //else if (x === player.x&&y === player.y) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//playe
-      
+      mouseCursor("green")
     }
   }
 }
-
+function mouseCursor(mouseColor){
+  noFill()
+  strokeWeight(4)
+  stroke(mouseColor);
+  rect(mouseGridX*xSize, mouseGridY*ySize, xSize, ySize);
+  stroke("black");
+  strokeWeight(2)
+  rect(mouseGridX*xSize+2, mouseGridY*ySize+2, xSize-4, ySize-4);
+  stroke("white");
+  strokeWeight(2)
+  rect(mouseGridX*xSize-2, mouseGridY*ySize-2, xSize+4, ySize+4);
+}
 
 function saveJSON(){
   saveJSON(grid, "DMessham-gridJS-save.json");
