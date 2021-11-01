@@ -8,10 +8,17 @@
 
 let refresh = 15//target framerate, used to calc realfps
 
-let gridX = 30;
+let gridX = 8;
 let gridY = gridX;
 
-let grid = []
+let grid = [[0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0]];
 
 let xSize = 10;
 let ySize = xSize;
@@ -21,9 +28,9 @@ let autoPlay = false;
 //let level = 1
 let level1;
 
+let grass;
 let tile;
 let wall;
-let grass;
 let leaf;
 let dirt;
 let playerSprite;
@@ -31,20 +38,18 @@ let playerSprite;
 let mouseGridX;
 let mouseGridY;
 
-//let player;
+let curPlayer = 'player1';
+let turn = 0
+let numPieces = 0
 
-let player = {
-  x:1, //initial position
-  y:2, //initial position
+let player1 = {
   score:0,//player 1 score
-  tiles:[[0,0],[20,20]]
+  tiles:[[0,0],[8,8]]
 };
 
 let player2 = {
-  x:1, //initial position
-  y:2, //initial position
   score:0,//player 1 score
-  tiles:[[20,0],[0,20]]
+  tiles:[[8,0],[0,8]]
 };
 
 // class PlayerTiles{
@@ -63,13 +68,13 @@ let player2 = {
 // }
 
 function preload(){
-  level1 = loadJSON("assets/terrain/lvl1.json");//assumes grid size is 30
   tile = loadImage('assets/paving1.png');
   wall = loadImage('assets/rock2.png');
   grass = loadImage('assets/grass1.png');
   leaf = loadImage('assets/leaves1.png');
   dirt = loadImage('assets/dirt1.png');
-  playerSprite = loadImage('assets/gear.png');
+  player2 = loadImage('assets/player2.png');
+  player1 = loadImage('assets/player1.png');
 }
 
 function setup() {
@@ -80,9 +85,7 @@ function setup() {
   stroke(128);
   xSize = windowWidth/gridX;
   ySize = windowHeight/gridY;
-  grid = level1;
-  player.x = 1
-  player.y = 1
+
 }
 
 function windowResized(){
@@ -91,21 +94,24 @@ function windowResized(){
 
 function draw() {
   background(12,35,12);
-  mouseGridX = Math.floor(mouseX/xSize);
-  mouseGridY = Math.floor(mouseY/ySize);
+  
   //nextTurn();
-  playerControl();
+  if(turn%2==1){curPlayer = 'player2'}
+  else{curPlayer = 'player1'};
+  numInput()
+  //playerMove(mouseGridX, mouseGridY, curPlayer)
   displayGrid();
 }
 
-function mousePressed(){
+function mousePressed(){//logic for finding what grid pos the mouse is on, and acting on the click
+  mouseGridX = Math.floor(mouseX/xSize);
+  mouseGridY = Math.floor(mouseY/ySize);
   console.log("clicked at X:"+mouseGridX + ", Y:" +mouseGridY)
+  if(numPieces<=64){
+    playerMove(mouseGridX, mouseGridY, curPlayer);
+    numPieces++;
+  }
 }
-
-
-// function nextTurn() {
-
-// }
 
 function CreateArray(row, col, value){
   xSize = windowWidth/gridX;
@@ -122,70 +128,46 @@ function CreateArray(row, col, value){
 
 function keyPressed(){
   
-  if(key==="e"){
-    grid = CreateArray(gridX, gridY, 1);
-  }
-  else if(key==="b"){
+  if(key==="r"){
     grid = CreateArray(gridX, gridY, 0);
   }
   else if(key==="k"){
-    saveJSON();
+    saveMapJSON();
   }
   else if(key==="l"){
     loadJSON()
   }
 }
 
-function playerControl(){
-  // if (keyIsDown(UP_ARROW)&&player.y>0){playerMove(player.x,player.y-1);}
-  // if (keyIsDown(DOWN_ARROW)&&player.y+1<gridY){playerMove(player.x,player.y+1);}
-  // if (keyIsDown(LEFT_ARROW)&&player.x>0){playerMove(player.x-1,player.y);}
-  // if (keyIsDown(RIGHT_ARROW)&&player.x+1<gridX){playerMove(player.x+1,player.y);}
-
-  // if (keyIsDown('w')){playerMove(player.x,player.y-1);}
-  // if (keyIsDown('s')){playerMove(player.x,player.y+1);}
-  // if (keyIsDown('a')){playerMove(player.x-1,player.y);}
-  // if (keyIsDown('d')){playerMove(player.x+1,player.y);}
-  numInput()
-  
-}
-
-function playerMove(newX,newY){
-  let oldX = player.x
-    let oldY = player.y
-    if (grid[newY][newX]===0||grid[newY][newX]===3||grid[newY][newX]===4){
-      player.x = newX
-      player.y = newY
-      grid[oldY][oldX]=player.oldPos;
-      player.oldPos = grid[newY][newX];
-      grid[newY][newX] = 2;
-      
-    }
-    if (grid[newY][newX]===3){level++}
-    displayGrid()
+function playerMove(newX,newY, player){
+  //let oldX = player.x
+  //let oldY = player.y
+  //grid[oldY][oldX]=grid[y][x];
+  if (grid[newY][newX]===0){
+    //player.x = newX
+    //player.y = newY
+    //grid[oldY][oldX]=player.oldPos;
+    //player.oldPos = grid[newY][newX];
+    grid[newY][newX] = turn%2;
+    
+  }
+  displayGrid()
 }
 
 function displayGrid() {
   for (let y=0; y<gridY; y++) {
     for (let x=0; x<gridX; x++) {
-
-      // if (grid[y][x] === 0) {fill(20);}//empty
-
-      // if (grid[y][x] === 1) {fill(180);}//wall
-
-      // if (grid[y][x] === 2) {fill(12,67,12);}//player
-      // if (x === player.x&&y === player.y) {fill(12,67,12);}//player
-
-      //rect(x*xSize, y*ySize,  xSize, ySize);
+      fill('green');
+      rect(x*xSize, y*ySize,  xSize, ySize)
       if (grid[y][x] === 0) {image(grass, x*xSize, y*ySize,  xSize, ySize);}//empty
 
-      else if (grid[y][x] === 1) {image(leaf, x*xSize, y*ySize,  xSize, ySize);}//wall
+      else if (grid[y][x] === 1) {image(player1, x*xSize, y*ySize,  xSize, ySize);}//Player1
 
-      else if (grid[y][x] === 2) {image(playerSprite, x*xSize, y*ySize,  xSize, ySize);}//player
+      else if (grid[y][x] === 2) {image(player2, x*xSize, y*ySize,  xSize, ySize);}//player2
 
-      else if (grid[y][x] === 3) {fill('yellow');rect(x*xSize, y*ySize,  xSize, ySize);}//goal
+      else if (grid[y][x] === 3) {fill('yellow');rect(x*xSize, y*ySize,  xSize, ySize);}
 
-      else if (grid[y][x] === 2) {image(path, x*xSize, y*ySize,  xSize, ySize);}//path
+      else if (grid[y][x] === 4) {image(path, x*xSize, y*ySize,  xSize, ySize);}
 
       mouseCursor(`green`)
     }
@@ -205,7 +187,7 @@ function mouseCursor(mouseColor){
   rect(mouseGridX*xSize, mouseGridY*ySize, xSize, ySize);
 }
 
-function saveJSON(){
+function saveMapJSON(){
   saveJSON(grid, "DMessham-gridJS-save.json");
 }
 
@@ -224,4 +206,41 @@ function numInput(){
     }
   }
   return grid;
+}
+
+class Piece{
+  constructor(x, y, player) {
+    this.x = x;
+    this.y = y;
+    this.player = player;
+    this.size = 10;
+    this.xSize = xSize
+    this.ySize = xSize
+  }
+  display() {
+    noStroke();
+    if(this.player===1){image(player1, x*xSize, y*ySize,  xSize, ySize);}
+    else if(this.player===2){image(player2, x*xSize, y*ySize,  xSize, ySize);}
+    else if(this.player===0){image(path, x*xSize, y*ySize,  xSize, ySize);}
+    else{fill('yellow');rect(x*xSize, y*ySize,  xSize, ySize)}
+    //circle(this.x,this.y,this.size);
+    // imageMode(CENTER);
+    //   Bimage(bImage, this.x, this.y, this.radius, this.radius)
+  }
+  move() {
+    let choice = random(100);//choose direction
+    if (choice < 25){//move up
+      this.y-=this.speed;
+    }
+    else if (choice < 50){//move down
+      this.y+=this.speed;
+    }
+    else if (choice < 75){//left
+      this.x-=this.speed;
+    }
+    else {//right
+      this.x+=this.speed;
+    }
+  }
+
 }
