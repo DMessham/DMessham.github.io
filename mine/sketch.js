@@ -1,18 +1,16 @@
 // Minesweep
 // Daniel Messham
-// wed 3 nov
+// fri 5 nov
 //
-// Extra for Experts:
-// - 
-//todo: paintfill, proper grid fill
 
+// NOTE: the rng for the grid is kinda wonky, i made it so your first clickwill regen the grid if it is a mine
 let gridSizeX = 32;
 let gridSizeY = 32;
 let gridSize = (gridSizeX+gridSizeY)/2;
 
 let grid = [];
 
-let initialGrid = [];
+let mineGrid = [];
 
 let cellSize;
 
@@ -20,17 +18,16 @@ let selectX = 0
 let selectY = 0
 
 let selectColorId = 0
-let selectColor
-
-let difficultyMult = 0.255;
-let maxMineCount = 35;
+let selectColor;
 
 let clickCount=0;
 let intClickCount=0;
 
+let clearCount = 0
+let totalCount = gridSizeX*gridSizeY
+
 function setup() {
-  frameRate(10)
-  maxMineCount = 15
+  frameRate(7)
   if (windowWidth < windowHeight) {
     createCanvas(windowWidth*0.99, windowWidth*0.99);
   }
@@ -45,8 +42,9 @@ function setup() {
 }
 
 function initializeGrid(){
-  initialGrid = CreateArray(gridSizeX, gridSizeY, 0)
-  initialGrid = FillRandArray(initialGrid)
+  mineGrid = CreateArray(gridSizeX, gridSizeY, 0)
+  //mineGrid = FillRandArray(mineGrid)
+  mineGrid = CreateRandArray(gridSizeX, gridSizeY)
 
   grid = [];
   for(let y=0; y<gridSizeY; y++){
@@ -71,7 +69,6 @@ function windowResized(){
 function draw() {
   if(gameRun){
     background(200);
-    fillColor()
     displayGrid();
     control();
   }
@@ -83,28 +80,36 @@ function CreateArray(row, col, value){
     grid.push([])
     for(let x=0; x<col; x++){
       grid[y].push(value);
+      totalCount++;
     }
   }
   return grid;
 }
 
-function CreateRandArrayOld(row, col){
-  let Ngrid = [];
+function CreateRandArray(row, col){
+  let mineGrid = [];
   for(let y=0; y<row; y++){
-    Ngrid.push([])
+    mineGrid.push([])
     for(let x=0; x<col; x++){
-      let rngVal = noise(x*(random(width)*difficultyMult), y*(random(height)*difficultyMult));
-      Ngrid[y].push(round(rngVal-0.16));
+      mineGrid[y].push(0);
+    }
+  for(let y=0; y<row; y++){
+    mineGrid.push([])
+    for(let x=0; x<col; x++){
+      let rngVal = noise(width*(random(width)*0.007), height*(random(height)*0.007));//why is semi predictable rng so hard, i can get why true rng is, but AAAAAAAAAAAAA
+      mineGrid[y].push(round(rngVal-0.053));
+      if (mineGrid[y][x]===1){totalCount--}
+      }
     }
   }
-  return Ngrid;
+  return mineGrid;
 }
 
 function FillRandArray(Ngrid){
-  for(let n=0; n<maxMineCount; n++){
-    let y = int(round(random(2,gridSizeY-1)));
-    let x = int(round(random(2,gridSizeX-1)));
-    if(x*y+ noise(random(width)*difficultyMult, random(height)*difficultyMult) > 2){
+  for(let n=0; n<160; n++){
+    let y = int(round(random(0,gridSizeY-1)));
+    let x = int(round(random(0,gridSizeX-1)));
+    if(x*y+ noise(random(width)*difficultyMult, random(height)*difficultyMult) > 1){
       Ngrid[y][x] = 1
     }
   }
@@ -112,43 +117,41 @@ function FillRandArray(Ngrid){
 }
 
 function displayGrid() {
-  let totalMineCount = 0
+  let totalMineCount = 0 //for alt win condition
+  let clearCount = 0
   for (let y=0; y<gridSize; y++) {
     for (let x=0; x<gridSize; x++) {
-      strokeWeight(1);
-      fillColor(grid[y][x]);
-      if(grid[y][x]=== 0){//undescovered
-        if(initialGrid[y][x]=== 1){fill("red"); totalMineCount ++}//mine
-        else {fill(20)};//clear
+      stroke(90)
+      strokeWeight(3);
+      if(grid[y][x]=== 0){//undiscovered
+        if(mineGrid[y][x]=== 1){fill(65); totalMineCount++; stroke(30)}//mine
+        else {fill(10)};//clear
       }
-      else if(grid[y][x]=== 1){//discovered/clicked
-        if (initialGrid[y][x]=== 0){fill(120)}//clear
-        else {fill("orange")};//mine
-      }
-      else if(grid[y][x]=== 2){
-        if(initialGrid[y][x]=== 1){fill("blue")}//flagged w/ mine
-        else(fill("green"))//flagged and clear 
-      }
-      else fill(50);//dec
-      rect((x*cellSize), (y*cellSize),  cellSize, cellSize);
-      textAlign((CENTER));
-        textSize(cellSize*0.75);
-        fill(nearColor(nearbyMines(x,y)))
-        text(nearbyMines(x,y), x*cellSize, y*cellSize,  cellSize, cellSize)
+      else if(grid[y][x]=== 1 && mineGrid[y][x]=== 0){fill(120); clearCount++}//cleared
 
-      if(grid[y][x]!=0 && initialGrid[y][x]!=1 ){//display numbers for neaby mine count
-        textAlign((CENTER));
+      else if(grid[y][x]=== 2){fill("green");}//flags
+      else fill(50);
+
+      rect(x*cellSize, y*cellSize, cellSize,cellSize)
+      
+      if(grid[y][x]===1 && mineGrid[y][x]===0 && nearbyMines(x,y)>0){//display numbers for neaby mine count
+        textAlign(CENTER);
         textSize(cellSize*0.75);
         fill(nearColor(nearbyMines(x,y)))
-        text(nearbyMines(x,y), x*cellSize, y*cellSize,  cellSize, cellSize)
+        text(nearbyMines(x,y), (x*cellSize)+2, (y*cellSize)+2,  (cellSize)-1)
       }
     }
   }
-  if (totalMineCount === 0){gameWin()}
+  if (totalMineCount === 0){gameWin()}// win condition, flagging all mines w/ any key
+  if (clearCount + totalMineCount === totalCount){gameWin()} //this alt win conditon doesnt work, and i dont have enough time nor energy to care, i wanted it to be a win if you cleared all the mines out, ill just say theres some LORE reason that they all must be marked
 }
 
 
 function mousePressed(){//change value in grid where the mouse currently is
+  click()
+}
+
+function click(){
   selectX = Math.floor(mouseX/cellSize);
   selectY = Math.floor(mouseY/cellSize);
   //grid[selectY][selectX] = selectColorId;
@@ -158,25 +161,20 @@ function mousePressed(){//change value in grid where the mouse currently is
     intClickCount++
     clickCount++
   }
-    if (initialGrid[selectY][selectX]===1 && intClickCount>1){
+    if (mineGrid[selectY][selectX]===1 && intClickCount>1){
       gameOver(); 
     }
-    else if (initialGrid[selectY][selectX]===1 && intClickCount<2){
+    else if (mineGrid[selectY][selectX]===1 && intClickCount<2){//prevent death on first click
       initializeGrid()
       intClickCount = 0
 
-      mousePressed()
+      click()
     }
 }
 
 function keyPressed(){
-  if (key="e"){
-    mousePressed()
-  }
-  if (key="f"){//flagging mines
-    if (grid[selectY][selectX]===0){grid[selectY][selectX] = 2}
-    else if (grid[selectY][selectX]===2){grid[selectY][selectX] = 0}
-  }
+  if (grid[selectY][selectX]===0){grid[selectY][selectX] = 2}
+  else if (grid[selectY][selectX]===2){grid[selectY][selectX] = 0}
 }
 
 function control(){
@@ -196,16 +194,6 @@ function control(){
   noStroke()
 }
 
-function fillColor(colorID){//for mouse pointer, cursor preview and cheats
-  if(colorID === 0){return(240)}//empty
-  else if(colorID === 1){ return("red")}//empty w/ mine
-  else if(colorID === 2){ return(120)}//discovered
-  else if(colorID === 3){ return("green")}//flagged empty
-  else if(colorID === 4){ return("blue")}//flagged w/ mine
-  else if(colorID === 5){ return("orange")}//mines detonated
-  else return(120);
-}
-
 function nearColor(count){//define text color for nraby mines on discovored but empty tiles
   if(count === 0){return(0,0,0,0)}//no mines nearby
   else if(count === 1){ return("blue")}
@@ -220,17 +208,29 @@ function nearColor(count){//define text color for nraby mines on discovored but 
 
 function gameOver(){
   fill('red');
+  stroke("white");
+  strokeWeight(2)
   gameRun = false;
-  rect(0,0,width,height);
+  for (let y=0; y<gridSize; y++) {
+    for (let x=0; x<gridSize; x++) {
+      if(mineGrid[y][x]=== 1){
+        rect(x*cellSize, y*cellSize, cellSize,cellSize)
+      }
+    }
+  }
+  strokeWeight(4)
+  rect(width/2-60, height/2-35, 100, 80)
+  noStroke()
+  textSize(20)
   fill('white');
-  text("You Died!", (width/2)-40, (height/2)-20, 60);
-  
+  text("You Died!", (width/2)-40, (height/2)-20, 60)
 }
 
 function gameWin(){
-  fill('green')
-  gameRun = false;
-  rect(0,0,width,height)
+  fill('green');
+  stroke("white");
+  strokeWeight(4)
+  rect(width/2-60, height/2-35, 100, 80)
   fill('white');
   text("You Win!", (width/2)-40, (height/2)-20, 60);
 }
@@ -239,8 +239,8 @@ function nearbyMines(x,y){
   let neighbours = 0;
   for (let i=-1; i<=1; i++) {
     for (let j=-1; j<=1; j++) {
-      if ((y+i<gridSizeY && x+j<gridSizeX && y+i>=0 && x+j>=0) && (initialGrid[y+i][x+j]===1 || grid[y+i][x+j] === 1)){
-        neighbours += initialGrid[y+i][x+j];
+      if ((y+i<gridSizeY && x+j<gridSizeX && y+i>=0 && x+j>=0) && (mineGrid[y+i][x+j]===1 || grid[y+i][x+j] === 1)){
+        neighbours += mineGrid[y+i][x+j];
       }
     }
   }
@@ -248,15 +248,16 @@ function nearbyMines(x,y){
 }
 
 function paintBucket(x, y){
-  if(initialGrid[y][x]===0){
+  if(mineGrid[y][x]===0){
     for (let i=-1; i<=1; i++) {
-      if ((y+i<gridSizeY &&  y+i>=0) && (initialGrid[y+i][x]===0 && grid[y+i][x] === 0)) {
+      if ((y+i<gridSizeY &&  y+i>=0) && (mineGrid[y+i][x]===0 && grid[y+i][x] === 0)) {
         grid[y+i][x]=1
-        paintBucket(x, y+i)
+        paintBucket(x, y+i)//i know there are propbably better ways to do this that i didnt think of
+        
       }
     }
     for (let j=-1; j<=1; j++) {
-      if ((x+j<gridSizeX && x+j>=0) && (initialGrid[y][x+j]===0 && grid[y][x+j] === 0)) {
+      if ((x+j<gridSizeX && x+j>=0) && (mineGrid[y][x+j]===0 && grid[y][x+j] === 0)) {
         grid[y][x+j]=1
         paintBucket(x+j, y)
       }
