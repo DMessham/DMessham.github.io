@@ -1,4 +1,2 @@
 # Dmessham.github.io
-DMessham's CompSci 30 repository\n
-Projects:\n
-[Pong](https://dmessham.github.io/pong) [DVD Bounce](https://dmessham.github.io/DVD) [RedFlash](https://dmessham.github.io/redflash) [trafficLight](https://dmessham.github.io/traffic) [linePerspective](https://dmessham.github.io/linePerspective)
+This is my github page used as a landing page, and for hosting my publicaly available content
