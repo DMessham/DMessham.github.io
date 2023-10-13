@@ -14,5 +14,5 @@ function windowResized(){
 }
 
 function draw() {
-  background(20);
+  
 }
