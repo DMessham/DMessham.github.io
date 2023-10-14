@@ -3,7 +3,7 @@ h1 {
 	font-size:25px;
 	text-align: center;
 	display: block;
-	margin: 5px;
+	margin:5px;
 	padding: 5px;
 	border-color: seagreen;
 	border-width: 2px;
@@ -13,8 +13,8 @@ h1 {
 }
 h2 {
 	color: white;
-	margin: 5px;
-	padding: 12px;
+	margin: 1px;
+	padding:6px;
 	border-width: 2px;
 	border-style: solid;
 	border-radius: 5px;
@@ -26,7 +26,7 @@ h2 {
 
 body{
 	background-color: rgb(30, 45, 30);
-	background-image: url("style/BG/square2.png");
+	background-image: url("assets/style/square2.png");
 	background-position: center;
 	background-repeat: repeat;
 	padding: 20px;
@@ -57,25 +57,24 @@ div {
 	background-color: rgb(35, 36, 30, 0.3);
 }
 
-.social li{
+div li{
 	color: floralwhite;
 	font-size: 20px;
-	margin: 4px;
+	margin: 2px;
 	display: block;
 	padding: 3px;
-	border-width: 2px;
-	border-style: solid;
+	border-style: none;
 	border-radius: 5px;
 	border-color: rgba(6, 138, 72, 0.253);
 	background-color: rgb(35, 36, 30, 0.3);
-	list-style-type: none;
+	list-style-image: url("assets/style/chevron-inverted.png");
 }
-.social li img .active:hover{
+div li img .active:hover{
 	color: rgb(223, 189, 120);
 	border-color: rgba(10, 172, 91, 0.767);
 	background-color: rgba(34, 133, 64, 0.466);
 }
-.social li a{
+div li a{
 	font-size: 20px;
 	color: rgb(233, 220, 194);
 	text-align:left;
@@ -89,17 +88,16 @@ div {
 	color: white;
 	background-color: rgb(35, 36, 30, 0.3);
 }
-.social li img{
+div li img{
 	border-style: none;
 	padding-right: 4px;
 	margin: 0px;
-	width:24px;
 }
 
 
 
 .background {
-	background-image: url("style/BG/Bitmap102a.bmp");
+	background-image: url("assets/style/Bitmap102a.bmp");
 	background-size: contain;
 	background-position: center;
 	background-repeat: repeat;
@@ -238,7 +236,7 @@ notice ul li {
 	margin-bottom: 0px;
 	margin-top: 0px;
 	color: floralwhite;
-	list-style-image: url("style/chevron-inverted.png");
+	list-style-image: url("assets/style/chevron-inverted.png");
 }
 
 notice ul li a{
@@ -298,7 +296,7 @@ li a{
 	
 	background-color: rgba(0, 0, 0, 0.02);
 	color: lightseagreen;
-	list-style-image: url("style/chevron-inverted.png");
+	list-style-image: url("assets/style/chevron-inverted.png");
 	display: inline-block;
 	list-style-position: outside;
 }
@@ -342,7 +340,7 @@ nav a {
 	border-style: none;
 	border-width: 0px;
 	border-radius: 3px;
-	background-image: url("style/BG/bar2_grey.bmp");
+	background-image: url("assets/style/bar2_grey.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border;
@@ -364,7 +362,7 @@ nav .name{
 	border-style: solid;
 	border-width: 0px;
 	border-radius: 0px;
-	background-image: url("style/BG/bar2_blue.bmp");
+	background-image: url("assets/style/bar2_blue.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border;
@@ -392,7 +390,7 @@ nav a:hover {
 	text-decoration: underline;
 	background-repeat: repeat-x;
 	display: inline-block;
-	background-image: url("style/BG/bar2_green.bmp");
+	background-image: url("assets/style/bar2_green.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border;
@@ -408,7 +406,7 @@ nav a:hover {
 	background-repeat: repeat-x;
 	border-style: solid;
 	display: inline-block;
-	background-image: url("style/BG/bar2_green.bmp");
+	background-image: url("assets/style/bar2_green.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border;
@@ -420,7 +418,7 @@ nav a:hover {
 	text-decoration: underline;
 	background-repeat: repeat-x;
 	display: inline-block;
-	background-image: url("style/BG/bar2_green.bmp");
+	background-image: url("assets/style/bar2_green.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border;
@@ -428,7 +426,7 @@ nav a:hover {
 
 homeBG {
 	background-color: darkslategray;
-	background-image: url("style/BG/Bitmap102a.bmp");
+	background-image: url("assets/style/Bitmap102a.bmp");
 	background-repeat: repeat-x;
 	background-size: cover;
 	background-size: 100%;
@@ -449,7 +447,7 @@ homeBG {
 
 .navbar{
 	background-color: rgb(20, 59, 33, 0);
-	background-image: url("style/BG/bar2_grey.bmp");
+	background-image: url("assets/style/bar2_grey.bmp");
 	background-repeat: repeat;
 	text-align: center;
 	font-size:23px;
@@ -523,11 +521,11 @@ homeBG {
 	border-color: rgba(255, 255, 255, 0.06);
 	color: white;
 	text-decoration: underline;
-	background-image: url("style/BG/bar2_green.bmp");
+	background-image: url("assets/style/bar2_green.bmp");
   }
 
 .navbar .active {
-	background-image: url("style/BG/bar2_blue.bmp");
+	background-image: url("assets/style/bar2_blue.bmp");
 	text-decoration: underline;
 }
 .navbar .active:hover {
@@ -562,7 +560,7 @@ iframe {
 	border-style: solid;
 	border-width: 1.5px;
 	border-radius: 4px;
-	background-image: url("style/window-gradient.png");
+	background-image: url("assets/style/window-gradient.png");
 	background-size: cover;
 	background-position: left top, ;
 }
@@ -644,7 +642,7 @@ homegrid li a:hover {
 	text-decoration: underline;
 	background-repeat: repeat-x;
 	border-style: solid;
-	background-image: url("style/BG/bar2_green.bmp");
+	background-image: url("assets/style/bar2_green.bmp");
 	background-size: cover;
 	background-position: center;
 	background-clip: border-box;
