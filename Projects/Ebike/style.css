@@ -95,6 +95,44 @@ div li img{
 }
 
 
+.social li{
+	color: floralwhite;
+	font-size: 20px;
+	margin: 4px;
+	display: block;
+	padding: 3px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 5px;
+	border-color: rgba(6, 138, 72, 0.253);
+	background-color: rgb(35, 36, 30, 0.3);
+	list-style-type: none;
+}
+.social li img .active:hover{
+	color: rgb(223, 189, 120);
+	border-color: rgba(10, 172, 91, 0.767);
+	background-color: rgba(34, 133, 64, 0.466);
+}
+.social li a{
+	font-size: 20px;
+	color: rgb(233, 220, 194);
+	text-align:left;
+	margin: 1px;
+	display: inline-flex;
+	padding: 1px;
+	padding-top:2px;
+	border-width: 2px;
+	border-style: none;
+	border-radius: 5px;
+	color: white;
+	background-color: rgb(35, 36, 30, 0.3);
+}
+.social li img{
+	border-style: none;
+	padding-right: 4px;
+	margin: 0px;
+	width:24px;
+}
 
 .background {
 	background-image: url("assets/style/Bitmap102a.bmp");
@@ -300,129 +338,7 @@ li a{
 	display: inline-block;
 	list-style-position: outside;
 }
-nav {
-	text-align: center;
-	list-style-type: none;
-	display: block;
-	padding: 0px;
-	margin: 0px;
-	border-radius: 5px;
-	border-width: 0px;
-}
 
-nav ul {
-	color: white;
-	list-style-type: none;
-	display: inline-block;
-	padding: 0px;
-	margin: 0px;
-	border-radius: 0px;
-	border-width: 0px;
-
-}
-
-nav ul li {
-	background-color: rgba(0, 0, 0, 0.12);
-	color: white;
-	margin: 0px;
-	padding: 0px;
-	display: inline;
-}
-nav a {
-	border: 0px solid rgba(37, 114, 37, 0.012);
-	background-color: rgb(20, 59, 33);
-	font-size:22px;
-	text-align: left;
-	text-decoration: none;
-	display: inline-block;
-	padding: 7px;
-	margin: 0px;
-	border-style: none;
-	border-width: 0px;
-	border-radius: 3px;
-	background-image: url("assets/style/bar2_grey.bmp");
-	background-size: cover;
-	background-position: center;
-	background-clip: border;
-	background-repeat: repeat-x;
-}
-
-nav .name{
-	border: 0px solid rgba(37, 114, 37, 0.012);
-	background-color: rgb(20, 59, 33);
-	font-size:22px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	padding: 9px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-	margin-top: 0px;
-	border-style: solid;
-	border-width: 0px;
-	border-radius: 0px;
-	background-image: url("assets/style/bar2_blue.bmp");
-	background-size: cover;
-	background-position: center;
-	background-clip: border;
-}
-nav a img {
-	background-color: rgb(20, 59, 33, 0);
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	padding-right: 6px;
-	margin: 0px;
-	border-width: 0px;
-	border-radius: 5px;
-	size: contain;
-}
-
-
-nav a:hover {
-	background-color: rgba(0, 128, 0, 0.24);
-	border-color: rgba(255, 255, 255, 0.06);
-	color: white;
-	text-decoration: underline;
-	background-repeat: repeat-x;
-	display: inline-block;
-	background-image: url("assets/style/bar2_green.bmp");
-	background-size: cover;
-	background-position: center;
-	background-clip: border;
-	margin: 0px;
-  }
-
-.active {
-	color: rgba(25, 212, 72, 0.44);
-	background-color: rgba(0, 128, 0, 0.24);
-	border-color: rgba(255, 255, 255, 0.06);
-	color: white;
-	text-decoration: underline;
-	background-repeat: repeat-x;
-	border-style: solid;
-	display: inline-block;
-	background-image: url("assets/style/bar2_green.bmp");
-	background-size: cover;
-	background-position: center;
-	background-clip: border;
-}
-.active:hover {
-	background-color: rgba(0, 128, 0, 0.24);
-	border-color: rgba(255, 255, 255, 0.06);
-	color: white;
-	text-decoration: underline;
-	background-repeat: repeat-x;
-	display: inline-block;
-	background-image: url("assets/style/bar2_green.bmp");
-	background-size: cover;
-	background-position: center;
-	background-clip: border;
-}
 
 homeBG {
 	background-color: darkslategray;
@@ -445,17 +361,16 @@ homeBG {
 
 
 
-.navbar{
+nav{
 	background-color: rgb(20, 59, 33, 0);
-	background-image: url("assets/style/bar2_grey.bmp");
-	background-repeat: repeat;
+	background-image: url("assets/style/BG/bar2_grey.bmp");
+		
 	text-align: center;
 	font-size:23px;
 	padding: 0px;
 	margin: 0px;
 	margin-left:3.5%;
-	margin-right:3.5%;
-	width:93%;
+	margin-right:3.5%;	
 	border-style: solid;
 	border-color: rgba(100, 114, 100, 0.42);
 	border-width: 0px;
@@ -468,33 +383,31 @@ homeBG {
 }
 
 
-.navbar li {
+nav li {
 	background-color: rgba(0, 0, 0, 0);
-	padding:0px;
 	font-size:inherit;
 	border: none;
 	color: palegoldenrod;
 	display: inline;
-	border-color: rgba(100, 114, 100, 0.42);
-	border-width: 0.25px;
-	border-radius: 5px;
-	margin-left:-1px;
-	margin-right:-1px;
+	border-width: 0px;
+	border-radius: 7px;
 }
-.navbar li a {
-	/*background-image: url("style/BG/bar2_grey.bmp");*/
-	margin-left:-1px;
-	margin-right:-1px;
+nav li a {
+	background-image: url("style/BG/bar2_grey.bmp");
+	margin-left:-2px;	
+	margin-right:-2px;
 	border: none;
 	font-size:inherit;
 	text-decoration: none;
-	padding: 7px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	padding-bottom: 6px;
 	border-radius: inherit;
-	background-size: cover;
-	background-repeat: repeat-x;
+	border-width: 0px;
 }
 
-.navbar img {
+nav img {
 	padding:2px;
 	padding-right: 5px;
 	border-style: none;
@@ -505,30 +418,21 @@ homeBG {
 	margin-right:0px;
 }
 
-.navbar .name{
-	/*background-image: url("style/BG/bar2_orange.bmp");
-	background-color: rgb(20, 59, 33);*/
-	border-radius: 4px;
-	font-size:inherit;
-	padding: 7.5px;
-	padding-left:9px;
-	padding-right:9px;
-	background-size: cover;
-}
-
-.navbar a:hover {
+nav a:hover {
 	background-color: rgba(0, 128, 0, 0.24);
 	border-color: rgba(255, 255, 255, 0.06);
 	color: white;
 	text-decoration: underline;
-	background-image: url("assets/style/bar2_green.bmp");
+	background-image: url("assets/style/BG/bar2_green.bmp");
+	
   }
 
-.navbar .active {
-	background-image: url("assets/style/bar2_blue.bmp");
+nav .active {
+	background-image: url("assets/style/BG/bar2_blue.bmp");
+	border-width: 0px;
 	text-decoration: underline;
 }
-.navbar .active:hover {
+nav .active:hover {
 	background-color: rgba(0, 128, 0, 0.24);
 	border-color: rgba(255, 255, 255, 0.06);
 	color: white;
