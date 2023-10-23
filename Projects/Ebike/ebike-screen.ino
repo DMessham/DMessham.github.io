@@ -1,6 +1,6 @@
 #include <LiquidCrystal.h>
 /* Pins */
-const int rs = 7, en = 8, d4 = 2, d5 = 3, d6 = 4, d7 = 5, pedalPulse = 6;
+const int rs = 3, en = 8, d4 = 4, d5 = 5, d6 = 6, d7 = 7, pedalPulse = 13;
 
 /* Variables used for calculations */
 const float gearRatio = 2.2, motorMaxRpm = 470, pulsePerRot = 1, wheelDia = 660.4, wheelRoll = 4.14941557686, batteryMaxVoltage = 24, BatteryMinVoltage = 12, MotorMaxAmps=18.75;
