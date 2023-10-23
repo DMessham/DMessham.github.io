@@ -2768,7 +2768,7 @@
   )
 
   (symbol (lib_id "Connector:Conn_01x11_Socket") (at 165.1 87.63 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom yes) (on_board no) (dnp no) (fields_autoplaced)
     (uuid def7af45-157a-4d98-96e7-ae43cdcfc452)
     (property "Reference" "J4" (at 166.37 86.36 0)
       (effects (font (size 1.27 1.27)) (justify left))

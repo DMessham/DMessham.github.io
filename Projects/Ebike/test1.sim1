@@ -28,6 +28,22 @@
 
 <item itemtype="KeyPad" CircId="KeyPad-1123" mainComp="false" Show_id="false" Show_Val="false" Pos="552,192" rotation="-360" hflip="1" vflip="1" label="KeyPad-1123" idLabPos="-8,-16" labelrot="0" valLabPos="-16,20" valLabRot="0" Rows="3 _Buttons" Cols="3 _Buttons" Key_Labels="↩⬆⏮⬅✅➡➕⬇➖" />
 
+<item itemtype="Ssd1306" CircId="Ssd1306-1245" mainComp="false" Show_id="true" Show_Val="false" Pos="1184,220" rotation="0" hflip="1" vflip="1" label="Ssd1306-1245" idLabPos="-32,-60" labelrot="0" valLabPos="-16,20" valLabRot="0" Color="White" Control_Code="60" Frequency="100 _KHz" />
+
+<item itemtype="Dht22" CircId="Dht22-1282" mainComp="false" Show_id="false" Show_Val="false" Pos="1276,340" rotation="0" hflip="1" vflip="1" label="Dht22-1282" idLabPos="-28,-32" labelrot="0" valLabPos="-16,20" valLabRot="0" DHT22="DHT22" TempInc="0.5 °C" HumiInc="5 _%" />
+
+<item itemtype="Subcircuit" CircId="Uno-1285" mainComp="false" Show_id="true" Show_Val="false" Pos="1040,236" rotation="0" hflip="1" vflip="1" label="Uno-1285" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="true">
+<mainCompProps itemtype="MCU" CircId="1285_mega328-109" mainComp="true" Show_id="false" Show_Val="false" Pos="20,20" rotation="0" hflip="1" vflip="1" label="1285_mega328-109" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Auto_Load="false" Rst_enabled="true" Ext_Osc="true" Wdt_enabled="false" />
+</item>
+
+<item itemtype="Subcircuit" CircId="Duemilanove-1287" mainComp="false" Show_id="true" Show_Val="false" Pos="1316,220" rotation="0" hflip="1" vflip="1" label="Duemilanove-1287" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Logic_Symbol="false">
+<mainCompProps itemtype="MCU" CircId="1287_mega168-109" mainComp="true" Show_id="false" Show_Val="false" Pos="20,20" rotation="0" hflip="1" vflip="1" label="1287_mega168-109" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Auto_Load="false" Rst_enabled="true" Ext_Osc="true" Wdt_enabled="false" />
+</item>
+
+<item itemtype="I2CToParallel" CircId="I2CToParallel-1288" mainComp="false" Show_id="false" Show_Val="false" Pos="1176,120" rotation="0" hflip="1" vflip="1" label="I2CToParallel-1288" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Control_Code="80" Frequency="100 _KHz" />
+
+<item itemtype="Bus" CircId="Bus-1293" mainComp="false" Show_id="false" Show_Val="false" Pos="956,388" rotation="0" hflip="1" vflip="1" label="Bus-1293" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Num_Bits="8 _Bits" Start_Bit="0" />
+
 <item itemtype="Node" CircId="Node-283" mainComp="false" Pos="748,608" />
 
 <item itemtype="Node" CircId="Node-898" mainComp="false" Pos="920,608" />
@@ -48,76 +64,76 @@
 
 <item itemtype="Node" CircId="Node-1207" mainComp="false" Pos="668,652" />
 
-<item itemtype="Connector" uid="connector-1159" startpinid="Switch-2-switch1pinN" endpinid="Battery-65-rPin" pointList="1032,608,1108,608,1108,624" />
+<item itemtype="Connector" uid="connector-1246" startpinid="Switch-2-switch1pinN" endpinid="Battery-65-rPin" pointList="1032,608,1108,608,1108,624" />
 
-<item itemtype="Connector" uid="connector-1160" startpinid="Switch-2-switch0pinN" endpinid="Battery-65-lPin" pointList="1032,624,1076,624" />
+<item itemtype="Connector" uid="connector-1247" startpinid="Switch-2-switch0pinN" endpinid="Battery-65-lPin" pointList="1032,624,1076,624" />
 
-<item itemtype="Connector" uid="connector-1161" startpinid="Nano-895-Vin" endpinid="VoltReg-484-output" pointList="900,300,932,300,932,564" />
+<item itemtype="Connector" uid="connector-1248" startpinid="Nano-895-Vin" endpinid="VoltReg-484-output" pointList="900,300,932,300,932,564" />
 
-<item itemtype="Connector" uid="connector-1162" startpinid="Nano-895-GND1" endpinid="Node-898-1" pointList="900,308,920,308,920,608" />
+<item itemtype="Connector" uid="connector-1249" startpinid="Nano-895-GND1" endpinid="Node-898-1" pointList="900,308,920,308,920,608" />
 
-<item itemtype="Connector" uid="connector-1163" startpinid="Node-898-2" endpinid="Switch-2-pinP2" pointList="920,608,1000,608" />
+<item itemtype="Connector" uid="connector-1250" startpinid="Node-898-2" endpinid="Switch-2-pinP2" pointList="920,608,1000,608" />
 
-<item itemtype="Connector" uid="connector-1164" startpinid="Nano-895-6" endpinid="WaveGen-827-outnod" pointList="852,364,632,364" />
+<item itemtype="Connector" uid="connector-1251" startpinid="Nano-895-6" endpinid="WaveGen-827-outnod" pointList="852,364,632,364" />
 
-<item itemtype="Connector" uid="connector-1165" startpinid="Hd44780-491-dataPin6" endpinid="Node-1088-0" pointList="764,280,764,348" />
+<item itemtype="Connector" uid="connector-1252" startpinid="Hd44780-491-dataPin6" endpinid="Node-1088-0" pointList="764,280,764,348" />
 
-<item itemtype="Connector" uid="connector-1166" startpinid="Hd44780-491-dataPin4" endpinid="Node-1094-0" pointList="748,280,748,332" />
+<item itemtype="Connector" uid="connector-1253" startpinid="Hd44780-491-dataPin4" endpinid="Node-1094-0" pointList="748,280,748,332" />
 
-<item itemtype="Connector" uid="connector-1167" startpinid="Hd44780-491-dataPin7" endpinid="Node-1085-0" pointList="772,280,772,356" />
+<item itemtype="Connector" uid="connector-1254" startpinid="Hd44780-491-dataPin7" endpinid="Node-1085-0" pointList="772,280,772,356" />
 
-<item itemtype="Connector" uid="connector-1168" startpinid="Hd44780-491-dataPin5" endpinid="Node-1091-0" pointList="756,280,756,340" />
+<item itemtype="Connector" uid="connector-1255" startpinid="Hd44780-491-dataPin5" endpinid="Node-1091-0" pointList="756,280,756,340" />
 
-<item itemtype="Connector" uid="connector-1169" startpinid="Hd44780-491-PinRS" endpinid="Node-1083-0" pointList="692,280,692,296,780,296,780,372" />
+<item itemtype="Connector" uid="connector-1256" startpinid="Hd44780-491-PinRS" endpinid="Node-1083-0" pointList="692,280,692,296,780,296,780,372" />
 
-<item itemtype="Connector" uid="connector-1170" startpinid="Node-1083-2" endpinid="Nano-895-7" pointList="780,372,852,372" />
+<item itemtype="Connector" uid="connector-1257" startpinid="Node-1083-2" endpinid="Nano-895-7" pointList="780,372,852,372" />
 
-<item itemtype="Connector" uid="connector-1171" startpinid="Node-1085-2" endpinid="Nano-895-5" pointList="772,356,852,356" />
+<item itemtype="Connector" uid="connector-1258" startpinid="Node-1085-2" endpinid="Nano-895-5" pointList="772,356,852,356" />
 
-<item itemtype="Connector" uid="connector-1172" startpinid="Node-1088-2" endpinid="Nano-895-4" pointList="764,348,852,348" />
+<item itemtype="Connector" uid="connector-1259" startpinid="Node-1088-2" endpinid="Nano-895-4" pointList="764,348,852,348" />
 
-<item itemtype="Connector" uid="connector-1173" startpinid="Node-1091-2" endpinid="Nano-895-3" pointList="756,340,852,340" />
+<item itemtype="Connector" uid="connector-1260" startpinid="Node-1091-2" endpinid="Nano-895-3" pointList="756,340,852,340" />
 
-<item itemtype="Connector" uid="connector-1174" startpinid="Node-1094-2" endpinid="Nano-895-2" pointList="748,332,852,332" />
+<item itemtype="Connector" uid="connector-1261" startpinid="Node-1094-2" endpinid="Nano-895-2" pointList="748,332,852,332" />
 
-<item itemtype="Connector" uid="connector-1175" startpinid="KeyPad-1122-Pin6" endpinid="Node-1083-1" pointList="724,412,724,432,780,432,780,372" />
+<item itemtype="Connector" uid="connector-1262" startpinid="KeyPad-1122-Pin6" endpinid="Node-1083-1" pointList="724,412,724,432,780,432,780,372" />
 
-<item itemtype="Connector" uid="connector-1176" startpinid="Nano-895-8" endpinid="Hd44780-491-PinEn" pointList="852,380,804,380,804,288,708,288,708,280" />
+<item itemtype="Connector" uid="connector-1263" startpinid="Nano-895-8" endpinid="Hd44780-491-PinEn" pointList="852,380,804,380,804,288,708,288,708,280" />
 
-<item itemtype="Connector" uid="connector-1177" startpinid="Node-1088-1" endpinid="KeyPad-1122-Pin4" pointList="764,348,764,424,692,424,692,412" />
+<item itemtype="Connector" uid="connector-1264" startpinid="Node-1088-1" endpinid="KeyPad-1122-Pin4" pointList="764,348,764,424,692,424,692,412" />
 
-<item itemtype="Connector" uid="connector-1178" startpinid="KeyPad-1122-Pin1" endpinid="Nano-895-10" pointList="740,396,852,396" />
+<item itemtype="Connector" uid="connector-1265" startpinid="KeyPad-1122-Pin1" endpinid="Nano-895-10" pointList="740,396,852,396" />
 
-<item itemtype="Connector" uid="connector-1179" startpinid="Node-1094-1" endpinid="KeyPad-1122-Pin2" pointList="748,332,748,416,660,416,660,412" />
+<item itemtype="Connector" uid="connector-1266" startpinid="Node-1094-1" endpinid="KeyPad-1122-Pin2" pointList="748,332,748,416,660,416,660,412" />
 
-<item itemtype="Connector" uid="connector-1180" startpinid="Node-1091-1" endpinid="KeyPad-1122-Pin3" pointList="756,340,756,420,676,420,676,412" />
+<item itemtype="Connector" uid="connector-1267" startpinid="Node-1091-1" endpinid="KeyPad-1122-Pin3" pointList="756,340,756,420,676,420,676,412" />
 
-<item itemtype="Connector" uid="connector-1181" startpinid="Node-1085-1" endpinid="KeyPad-1122-Pin5" pointList="772,356,772,428,708,428,708,412" />
+<item itemtype="Connector" uid="connector-1268" startpinid="Node-1085-1" endpinid="KeyPad-1122-Pin5" pointList="772,356,772,428,708,428,708,412" />
 
-<item itemtype="Connector" uid="connector-1182" startpinid="Nano-895-9" endpinid="KeyPad-1122-Pin0" pointList="852,388,740,388,740,380" />
+<item itemtype="Connector" uid="connector-1269" startpinid="Nano-895-9" endpinid="KeyPad-1122-Pin0" pointList="852,388,740,388,740,380" />
 
-<item itemtype="Connector" uid="connector-1183" startpinid="Switch-2-pinP0" endpinid="Node-1158-0" pointList="1000,624,932,624" />
+<item itemtype="Connector" uid="connector-1270" startpinid="Switch-2-pinP0" endpinid="Node-1158-0" pointList="1000,624,932,624" />
 
-<item itemtype="Connector" uid="connector-1184" startpinid="Node-1158-2" endpinid="VoltReg-484-input" pointList="932,624,932,596" />
+<item itemtype="Connector" uid="connector-1271" startpinid="Node-1158-2" endpinid="VoltReg-484-input" pointList="932,624,932,596" />
 
-<item itemtype="Connector" uid="connector-1185" startpinid="Voltimeter-20-rPin" endpinid="Node-283-1" pointList="684,608,748,608" />
+<item itemtype="Connector" uid="connector-1272" startpinid="Voltimeter-20-rPin" endpinid="Node-283-1" pointList="684,608,748,608" />
 
-<item itemtype="Connector" uid="connector-1186" startpinid="DcMotor-4-rPin" endpinid="Node-283-0" pointList="748,712,748,608" />
+<item itemtype="Connector" uid="connector-1273" startpinid="DcMotor-4-rPin" endpinid="Node-283-0" pointList="748,712,748,608" />
 
-<item itemtype="Connector" uid="connector-1187" startpinid="Node-283-2" endpinid="Node-1196-0" pointList="748,608,752,608" />
+<item itemtype="Connector" uid="connector-1274" startpinid="Node-283-2" endpinid="Node-1196-0" pointList="748,608,752,608" />
 
-<item itemtype="Connector" uid="connector-1190" startpinid="Potentiometer-227-PinB" endpinid="Node-1158-1" pointList="788,576,788,624,932,624" />
+<item itemtype="Connector" uid="connector-1275" startpinid="Potentiometer-227-PinB" endpinid="Node-1158-1" pointList="788,576,788,624,932,624" />
 
-<item itemtype="Connector" uid="Connector-1195" startpinid="Potentiometer-227-PinA" endpinid="Node-1196-1" pointList="756,576,752,576,752,608" />
+<item itemtype="Connector" uid="connector-1276" startpinid="Potentiometer-227-PinA" endpinid="Node-1196-1" pointList="756,576,752,576,752,608" />
 
-<item itemtype="Connector" uid="Connector-1197" startpinid="Node-1196-2" endpinid="Node-898-0" pointList="752,608,920,608" />
+<item itemtype="Connector" uid="connector-1277" startpinid="Node-1196-2" endpinid="Node-898-0" pointList="752,608,920,608" />
 
-<item itemtype="Connector" uid="connector-1189" startpinid="DcMotor-4-lPin" endpinid="Node-1207-0" pointList="668,712,668,652" />
+<item itemtype="Connector" uid="connector-1278" startpinid="DcMotor-4-lPin" endpinid="Node-1207-0" pointList="668,712,668,652" />
 
-<item itemtype="Connector" uid="Connector-1205" startpinid="VoltReg-70-input" endpinid="Potentiometer-227-PinM" pointList="724,620,724,592,772,592" />
+<item itemtype="Connector" uid="connector-1279" startpinid="VoltReg-70-input" endpinid="Potentiometer-227-PinM" pointList="724,620,724,592,772,592" />
 
-<item itemtype="Connector" uid="Connector-1206" startpinid="VoltReg-70-output" endpinid="Node-1207-1" pointList="724,652,668,652" />
+<item itemtype="Connector" uid="connector-1280" startpinid="VoltReg-70-output" endpinid="Node-1207-1" pointList="724,652,668,652" />
 
-<item itemtype="Connector" uid="Connector-1208" startpinid="Node-1207-2" endpinid="Voltimeter-20-lPin" pointList="668,652,668,608" />
+<item itemtype="Connector" uid="connector-1281" startpinid="Node-1207-2" endpinid="Voltimeter-20-lPin" pointList="668,652,668,608" />
 
 </circuit>
